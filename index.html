@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pulau 3: Penilaian Suara</title>
+<!-- Pengembaraan Pulau Ilmu — Modul Pulau 3. Ikon: Font Awesome Free (CC BY 4.0). -->
+<style>:root{--navy:#0B1E3F; --navy2:#14284F; --ink:#14213D; --body:#3D4A6B; --muted:#5E6A88; --line:#C9D3EA; --soft:#F4F7FF;--gold:#F4C24D; --goldD:#A9761C; --goldSoft:#FFE7A3; --turq:#3FD5CF; --turqD:#137A7D; --mint:#B8FFF6;--pink:#E85D8A; --pinkD:#7A1F4A; --pinkSoft:#FDEBF2; --violet:#7C5CFF; --violetD:#3E25A0;--green:#1E8A5C; --greenSoft:#E3F6EC; --orange:#B5530E; --orangeSoft:#FFF1E2; --grey:#5B6785; --greySoft:#EEF1F7;--red:#C0392B; --fs:1;}*{box-sizing:border-box}html{background:#0B1E3F}html,body{margin:0;min-height:100%}svg{width:1.2em;height:1.2em;fill:currentColor;vertical-align:-.2em;flex:0 0 auto}body{font-family:Arial,Helvetica,"Segoe UI",Roboto,sans-serif;color:#fff;font-size:calc(16px*var(--fs));background:radial-gradient(1.5px 1.5px at 12% 18%,#fff8 50%,transparent 51%),radial-gradient(1.5px 1.5px at 72% 12%,#fff8 50%,transparent 51%),radial-gradient(2px 2px at 88% 40%,#FFE7A3aa 50%,transparent 51%),radial-gradient(1.5px 1.5px at 30% 70%,#fff6 50%,transparent 51%),radial-gradient(1.5px 1.5px at 55% 88%,#fff6 50%,transparent 51%),radial-gradient(ellipse at 50% 120%,#7A1F4A 0%,#2A0F2E 45%,var(--navy) 85%) fixed;}.app{max-width:1180px;margin:0 auto;padding:12px 16px 24px}[hidden]{display:none!important}.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}.demo-banner{background:var(--gold);color:var(--ink);font-weight:bold;text-align:center;border-radius:12px;padding:8px 12px;margin-bottom:10px;letter-spacing:.3px}.topbar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:12px}.isle-badge{display:flex;align-items:center;gap:10px;background:var(--navy);border:2.5px solid var(--pink);border-radius:999px;padding:6px 18px 6px 6px;box-shadow:0 3px 8px #0006}.isle-num{width:42px;height:42px;border-radius:50%;background:var(--pink);display:grid;place-items:center;font-weight:bold;font-size:22px;border:2px solid #fff}.isle-badge small{display:block;color:var(--goldSoft);font-weight:bold;letter-spacing:3px;font-size:11px}.isle-badge strong{display:block;font-size:20px}.status{display:flex;align-items:center;gap:8px;background:var(--navy);border:2px solid var(--turq);border-radius:999px;padding:8px 16px;font-weight:bold;font-size:15px;margin-left:auto}.status svg{width:20px;height:20px;flex:0 0 auto}.status.s-listening{border-color:#FF8AB4;background:#3A1438}.status.s-interrupted,.status.s-denied,.status.s-unsupported{border-color:#FF9EA1;background:#4A1414}.status.s-done{border-color:#7BE0AD}.status.s-demo{border-color:var(--gold);background:#3A2A08}.status .dot{width:10px;height:10px;border-radius:50%;background:#FF6B6B;box-shadow:0 0 0 4px #FF6B6B33}@media (prefers-reduced-motion:no-preference){.status.s-listening .dot{animation:pulse 1.4s ease-in-out infinite}}@keyframes pulse{50%{box-shadow:0 0 0 8px #FF6B6B11}}.icon-btn{min-width:48px}.btn{--c:var(--turq);--d:var(--turqD);--t:var(--navy);display:inline-flex;align-items:center;justify-content:center;gap:10px;font:bold calc(17px*var(--fs)) Arial,Helvetica,sans-serif;color:var(--t);background:var(--c);border:2px solid #ffffffaa;border-radius:999px;padding:12px 22px;min-height:52px;cursor:pointer;box-shadow:0 5px 0 var(--d),0 7px 12px #0005;transition:transform .08s,box-shadow .08s;text-decoration:none}.btn svg{width:22px;height:22px;flex:0 0 auto;fill:currentColor}.btn:hover{filter:brightness(1.05)}.btn:active{transform:translateY(4px);box-shadow:0 1px 0 var(--d),0 2px 6px #0005}.btn:focus-visible,.chip:focus-visible,.word-btn:focus-visible{outline:4px solid var(--gold);outline-offset:3px}.btn[disabled]{opacity:.55;cursor:not-allowed;transform:none}.btn.primary{--c:var(--gold);--d:var(--goldD);--t:var(--ink)}.btn.nav{--c:#1E3A78;--d:#0A1A40;--t:#fff;border-color:#6FE3EA}.btn.rec{--c:#E5484D;--d:#8F2328;--t:#fff}.btn.stop{--c:#2D3142;--d:#111320;--t:#fff}.btn.violet{--c:var(--violet);--d:var(--violetD);--t:#fff}.btn.light{--c:#fff;--d:#8D9BB8;--t:var(--ink)}.btn.big{font-size:calc(22px*var(--fs));padding:16px 30px;min-height:64px}.btn.small{font-size:calc(14px*var(--fs));padding:8px 14px;min-height:42px}.btn-row{display:flex;flex-wrap:wrap;gap:14px;margin-top:16px}.panel{background:#fff;color:var(--ink);border-radius:20px;padding:20px;box-shadow:0 6px 18px #0006;border:3px solid var(--pink)}.panel.dark{background:#2A0F2E;color:#fff;border-color:var(--pink)}.panel h2,.panel h3{margin:0 0 8px}.screen>h1{font-size:calc(34px*var(--fs));margin:6px 0 4px;color:#FFD866;text-shadow:0 2px 0 #3A2290}.lead{font-size:calc(19px*var(--fs));line-height:1.5;color:#E7EEFF;margin:0 0 14px;max-width:62ch}.grid2{display:grid;grid-template-columns:1.25fr 1fr;gap:18px;align-items:start}.notes{display:grid;gap:12px}.note{display:flex;gap:12px;align-items:flex-start;background:#fff;color:var(--ink);border-radius:16px;padding:14px 16px;border:2px solid var(--line)}.note svg{width:26px;height:26px;flex:0 0 auto;fill:var(--pink)}.note>div>b{display:block;margin-bottom:2px}.note p{margin:0;line-height:1.45;color:var(--body);font-size:calc(15px*var(--fs))}.note.warn{border-color:var(--gold);background:#FFF8E4}.note.warn svg{fill:var(--goldD)}.note.alert{border-color:#FF9EA1;background:#FFF0F0}.note.alert svg{fill:var(--red)}.engine{font-size:13px;color:#C9D6F5;margin-top:10px}.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-top:8px}.step{background:#fff;color:var(--ink);border-radius:18px;padding:16px;border:3px solid var(--pink);position:relative}.step .n{width:44px;height:44px;border-radius:50%;background:var(--gold);color:var(--ink);font-weight:bold;font-size:22px;display:grid;place-items:center;border:3px solid #fff;box-shadow:0 2px 6px #0004;margin-bottom:8px}.step b{display:block;font-size:calc(18px*var(--fs));margin-bottom:4px}.step p{margin:0;color:var(--body);line-height:1.45}.meter{height:26px;border-radius:999px;background:var(--greySoft);border:2px solid var(--line);overflow:hidden;margin:10px 0}.meter>i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--turq),var(--gold),var(--pink));transition:width .08s}.check{display:flex;align-items:center;gap:8px;font-weight:bold;color:var(--green);margin-top:6px}.check svg{width:22px;height:22px;fill:var(--green)}ol.help{margin:8px 0 0 20px;padding:0;line-height:1.6}.read-wrap{display:grid;grid-template-columns:1.5fr 1fr;gap:18px;align-items:start}.passage h2 svg{width:28px;height:28px;fill:var(--pink)}.teacher h3 svg{width:24px;height:24px;fill:var(--violet)}.passage h2{font-size:calc(24px*var(--fs));color:var(--pinkD);display:flex;align-items:center;gap:10px;flex-wrap:wrap}.passage .para{font-size:calc(22px*var(--fs));line-height:1.9;margin:0 0 12px}.sent{border-radius:8px;padding:2px 2px}.sent.current{background:#FFF3C4;box-shadow:0 0 0 3px #FFE7A3}.sent.focus{background:#E5EDFF;box-shadow:0 0 0 3px #9DB6FF}.sent.dim{opacity:.35}.w{position:relative;border-radius:4px;padding:0 1px;text-decoration-thickness:3px;text-underline-offset:6px}.w.betul{text-decoration:underline solid var(--green)}.w.semak,.w.lain{text-decoration:underline dotted var(--orange);background:var(--orangeSoft)}.w.kurangPasti{text-decoration:underline dashed var(--grey);background:var(--greySoft)}.w.tinggal{outline:2px dotted var(--violet);outline-offset:1px;background:#F1ECFF}.w .badge{position:absolute;top:-12px;right:-6px;font:bold 12px Arial;color:#fff;border-radius:8px;padding:0 4px;line-height:16px}.w.semak .badge,.w.lain .badge{background:var(--orange)}.w.kurangPasti .badge{background:var(--grey)}.w.tinggal .badge{background:var(--violet)}.w.cursor{box-shadow:inset 0 -4px 0 var(--pink)}.legend{display:flex;flex-wrap:wrap;gap:8px 16px;font-size:calc(13px*var(--fs));color:var(--body);margin-top:6px}.legend span{display:inline-flex;align-items:center;gap:6px}.legend .sw{display:inline-block;width:34px;height:18px;border-radius:4px}.sw.betul{border-bottom:3px solid var(--green)}.sw.semak{border-bottom:3px dotted var(--orange);background:var(--orangeSoft)}.sw.kurangPasti{border-bottom:3px dashed var(--grey);background:var(--greySoft)}.sw.tinggal{outline:2px dotted var(--violet);background:#F1ECFF}.heard{margin-top:12px;background:var(--soft);border:2px dashed var(--line);border-radius:14px;padding:10px 14px;min-height:56px}.heard small{display:block;font-weight:bold;color:var(--muted);letter-spacing:1px;font-size:11px}.heard p{margin:2px 0 0;font-size:calc(17px*var(--fs));color:var(--ink)}.heard .interim{color:var(--muted);font-style:italic}.controls{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-bottom:14px}.timer{font-weight:bold;background:var(--navy);border:2px solid var(--line);border-radius:999px;padding:8px 14px}.repeat-banner{display:flex;align-items:center;gap:12px;flex-wrap:wrap;background:#E5EDFF;color:var(--ink);border:2px solid #9DB6FF;border-radius:14px;padding:10px 14px;margin-bottom:12px;font-weight:bold}.fb-col{display:grid;gap:14px}.fb-col>h2{margin:0;font-size:calc(20px*var(--fs));color:#FFD866}.fb-empty{background:#ffffff14;border:2px dashed #ffffff55;border-radius:16px;padding:16px;color:#E7EEFF;line-height:1.5}.card{background:#fff;color:var(--ink);border-radius:18px;padding:14px 16px;border:3px solid var(--line);box-shadow:0 4px 12px #0005}.card.mark-dot{border-color:#2563EB}.card.mark-q{border-color:#C2367A}.card.mark-ex{border-color:#E0A21B}.card header{display:flex;align-items:center;gap:8px;font-weight:bold;color:var(--muted);font-size:13px;letter-spacing:1px}.mk{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;color:#fff;font-size:20px;font-weight:bold;flex:0 0 auto}.mark-dot .mk{background:#2563EB}.mark-q .mk{background:#C2367A}.mark-ex .mk{background:#E0A21B;color:var(--ink)}.tag-demo{margin-left:auto;background:var(--gold);color:var(--ink);border-radius:6px;padding:2px 8px;font-size:12px;letter-spacing:1px}.card .quote{font-size:calc(16px*var(--fs));margin:8px 0;line-height:1.45;color:var(--ink)}.fb-row{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-top:1px solid var(--line)}.fb-row>svg{width:22px;height:22px;flex:0 0 auto;margin-top:2px}.fb-row.good>svg{fill:var(--green)}.fb-row.try>svg{fill:var(--orange)}.fb-row.tone>svg{fill:var(--violet)}.fb-row b{display:block;font-size:calc(15px*var(--fs))}.fb-row p{margin:2px 0 0;line-height:1.45;color:var(--body);font-size:calc(15px*var(--fs))}.fb-row ul{margin:4px 0 0;padding-left:18px;color:var(--body);line-height:1.6}.chip,.word-btn{display:inline-flex;align-items:center;gap:6px;font:bold calc(15px*var(--fs)) Arial;background:var(--orangeSoft);color:var(--ink);border:2px solid var(--orange);border-radius:999px;padding:4px 12px;cursor:pointer;margin:2px 4px 2px 0}.chip.unsure{background:var(--greySoft);border-color:var(--grey)}.chip.missed{background:#F1ECFF;border-color:var(--violet)}.fb-row svg.contour,svg.contour{display:block;width:100%;max-width:260px;height:70px;fill:none;background:var(--soft);border-radius:10px;border:1px solid var(--line);margin-top:6px}.tentative{font-size:12px;color:var(--muted);margin-top:4px}.end-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}.end-card{background:#fff;color:var(--ink);border-radius:20px;padding:18px;border:3px solid var(--line)}.end-card h2{display:flex;align-items:center;gap:10px;font-size:calc(19px*var(--fs));margin:0 0 8px}.end-card h2 svg{width:28px;height:28px}.end-card.good{border-color:var(--green)}.end-card.good h2 svg{fill:var(--green)}.end-card.try{border-color:var(--orange)}.end-card.try h2 svg{fill:var(--orange)}.end-card.again{border-color:var(--violet)}.end-card.again h2 svg{fill:var(--violet)}.end-card p,.end-card li{line-height:1.5;color:var(--body)}.teacher{margin-top:16px}.teacher table{width:100%;border-collapse:collapse;margin-top:8px}.teacher td,.teacher th{padding:8px;border-bottom:1px solid var(--line);text-align:left;font-size:calc(15px*var(--fs))}.seg{display:inline-flex;border:2px solid var(--line);border-radius:999px;overflow:hidden}.seg button{font:bold 13px Arial;border:0;background:#fff;color:var(--ink);padding:8px 12px;cursor:pointer}.seg button[aria-pressed="true"]{background:var(--violet);color:#fff}.dialog{position:fixed;inset:0;background:#0009;display:grid;place-items:center;padding:16px;z-index:10}.dialog .panel{max-width:560px;width:100%}.dialog h2{color:var(--pinkD)}@media (max-width:860px){.grid2,.read-wrap{grid-template-columns:1fr}.status{margin-left:0;width:100%;justify-content:center}.screen>h1{font-size:calc(28px*var(--fs))}.passage .para{font-size:calc(20px*var(--fs))}}@media (max-width:480px){.app{padding:10px 12px 20px}.btn{width:100%}.btn-row{gap:10px}.isle-badge strong{font-size:17px}}</style>
+</head>
+<body>
+<div class="app" id="app">
+  <div class="demo-banner" id="demoBanner" role="note" hidden>MOD DEMO — tiada mikrofon digunakan. Semua maklum balas di bawah ialah CONTOH sahaja.</div>
+
+  <header class="topbar">
+    <div class="isle-badge"><span class="isle-num" aria-hidden="true">3</span><div><small>PULAU 3</small><strong>Penilaian Suara</strong></div></div>
+    <div class="status" id="status" role="status" aria-live="polite"></div>
+    <button class="btn light small icon-btn" type="button" data-act="textsize" aria-label="Tukar saiz teks"><svg fill="currentColor" viewBox="0 0 576 512" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><path d="M304 32H16A16 16 0 0 0 0 48v96a16 16 0 0 0 16 16h32a16 16 0 0 0 16-16v-32h56v304H80a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h160a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16h-40V112h56v32a16 16 0 0 0 16 16h32a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16zm256 336h-48V144h48c14.31 0 21.33-17.31 11.31-27.31l-80-80a16 16 0 0 0-22.62 0l-80 80C379.36 126 384.36 144 400 144h48v224h-48c-14.31 0-21.32 17.31-11.31 27.31l80 80a16 16 0 0 0 22.62 0l80-80C580.64 386 575.64 368 560 368z"></path></svg><span>A+</span></button>
+  </header>
+
+  <main>
+    <!-- ================= SKRIN UTAMA ================= -->
+    <section class="screen" id="s-home" aria-labelledby="h-home">
+      <h1 id="h-home" tabindex="-1">Pulau 3: Penilaian Suara</h1>
+      <p class="lead">Selamat datang ke pentas suara! Baca petikan dengan lantang. Komputer akan <b>mendengar</b> dan memberi <b>cadangan</b> supaya bacaan kamu lebih jelas. Guru kamu tetap penilai utama.</p>
+      <div class="grid2">
+        <div class="panel">
+          <h2>Sedia untuk membaca?</h2>
+          <p style="margin:0;color:var(--body);line-height:1.5">Petikan hari ini: <b id="homeTitle"></b></p>
+          <div class="btn-row">
+            <button class="btn primary big" type="button" data-act="start"><svg fill="currentColor" viewBox="0 0 352 512" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><path d="M176 352c53.02 0 96-42.98 96-96V96c0-53.02-42.98-96-96-96S80 42.98 80 96v160c0 53.02 42.98 96 96 96zm160-160h-16c-8.84 0-16 7.16-16 16v48c0 74.8-64.49 134.82-140.79 127.38C96.71 376.89 48 317.11 48 250.3V208c0-8.84-7.16-16-16-16H16c-8.84 0-16 7.16-16 16v40.16c0 89.64 63.97 169.55 152 181.69V464H96c-8.84 0-16 7.16-16 16v16c0 8.84 7.16 16 16 16h160c8.84 0 16-7.16 16-16v-16c0-8.84-7.16-16-16-16h-56v-33.77C285.71 418.47 352 344.9 352 256v-48c0-8.84-7.16-16-16-16z"></path></svg>Mula Membaca</button>
+            <button class="btn light" type="button" data-act="howto"><svg fill="currentColor" viewBox="0 0 512 512" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><path d="M504 256c0 136.997-111.043 248-248 248S8 392.997 8 256C8 119.083 119.043 8 256 8s248 111.083 248 248zM262.655 90c-54.497 0-89.255 22.957-116.549 63.758-3.536 5.286-2.353 12.415 2.715 16.258l34.699 26.31c5.205 3.947 12.621 3.008 16.665-2.122 17.864-22.658 30.113-35.797 57.303-35.797 20.429 0 45.698 13.148 45.698 32.958 0 14.976-12.363 22.667-32.534 33.976C247.128 238.528 216 254.941 216 296v4c0 6.627 5.373 12 12 12h56c6.627 0 12-5.373 12-12v-1.333c0-28.462 83.186-29.647 83.186-106.667 0-58.002-60.165-102-116.531-102zM256 338c-25.365 0-46 20.635-46 46 0 25.364 20.635 46 46 46s46-20.636 46-46c0-25.365-20.635-46-46-46z"></path></svg>Cara Menggunakan</button>
+            <button class="btn violet" type="button" data-act="demo"><svg fill="currentColor" viewBox="0 0 640 512" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><path d="M206.86 245.15c-35.88 10.45-59.95 41.2-57.53 74.1 11.4-12.72 28.81-23.7 49.9-30.92l7.63-43.18zM95.81 295L64.08 115.49c-.29-1.62.28-2.62.24-2.65 57.76-32.06 123.12-49.01 189.01-49.01 1.61 0 3.23.17 4.85.19 13.95-13.47 31.73-22.83 51.59-26 18.89-3.02 38.05-4.55 57.18-5.32-9.99-13.95-24.48-24.23-41.77-27C301.27 1.89 277.24 0 253.32 0 176.66 0 101.02 19.42 33.2 57.06 9.03 70.48-3.92 98.48 1.05 126.58l31.73 179.51c14.23 80.52 136.33 142.08 204.45 142.08 3.59 0 6.75-.46 10.01-.8-13.52-17.08-28.94-40.48-39.5-67.58-47.61-12.98-106.06-51.62-111.93-84.79zm97.55-137.46c-.73-4.12-2.23-7.87-4.07-11.4-8.25 8.91-20.67 15.75-35.32 18.32-14.65 2.58-28.67.4-39.48-5.17-.52 3.94-.64 7.98.09 12.1 3.84 21.7 24.58 36.19 46.34 32.37 21.75-3.82 36.28-24.52 32.44-46.22zM606.8 120.9c-88.98-49.38-191.43-67.41-291.98-51.35-27.31 4.36-49.08 26.26-54.04 54.36l-31.73 179.51c-15.39 87.05 95.28 196.27 158.31 207.35 63.03 11.09 204.47-53.79 219.86-140.84l31.73-179.51c4.97-28.11-7.98-56.11-32.15-69.52zm-273.24 96.8c3.84-21.7 24.58-36.19 46.34-32.36 21.76 3.83 36.28 24.52 32.45 46.22-.73 4.12-2.23 7.87-4.07 11.4-8.25-8.91-20.67-15.75-35.32-18.32-14.65-2.58-28.67-.4-39.48 5.17-.53-3.95-.65-7.99.08-12.11zm70.47 198.76c-55.68-9.79-93.52-59.27-89.04-112.9 20.6 25.54 56.21 46.17 99.49 53.78 43.28 7.61 83.82.37 111.93-16.6-14.18 51.94-66.71 85.51-122.38 75.72zm130.3-151.34c-8.25-8.91-20.68-15.75-35.33-18.32-14.65-2.58-28.67-.4-39.48 5.17-.52-3.94-.64-7.98.09-12.1 3.84-21.7 24.58-36.19 46.34-32.37 21.75 3.83 36.28 24.52 32.45 46.22-.73 4.13-2.23 7.88-4.07 11.4z"></path></svg>Cuba Mod Demo</button>
+            <button class="btn nav" type="button" data-act="map"><svg fill="currentColor" viewBox="0 0 576 512" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><path d="M288 0c-69.59 0-126 56.41-126 126 0 56.26 82.35 158.8 113.9 196.02 6.39 7.54 17.82 7.54 24.2 0C331.65 284.8 414 182.26 414 126 414 56.41 357.59 0 288 0zm0 168c-23.2 0-42-18.8-42-42s18.8-42 42-42 42 18.8 42 42-18.8 42-42 42zM20.12 215.95A32.006 32.006 0 0 0 0 245.66v250.32c0 11.32 11.43 19.06 21.94 14.86L160 448V214.92c-8.84-15.98-16.07-31.54-21.25-46.42L20.12 215.95zM288 359.67c-14.07 0-27.38-6.18-36.51-16.96-19.66-23.2-40.57-49.62-59.49-76.72v182l192 64V266c-18.92 27.09-39.82 53.52-59.49 76.72-9.13 10.77-22.44 16.95-36.51 16.95zm266.06-198.51L416 224v288l139.88-55.95A31.996 31.996 0 0 0 576 426.34V176.02c0-11.32-11.43-19.06-21.94-14.86z"></path></svg>Kembali ke Peta</button>
+          </div>
+          <p class="engine" id="engineInfo" style="color:var(--muted)"></p>
+        </div>
+        <div class="notes">
+          <div class="note warn"><svg fill="currentColor" viewBox="0 0 640 512" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><path d="M32,224H64V416H32A31.96166,31.96166,0,0,1,0,384V256A31.96166,31.96166,0,0,1,32,224Zm512-48V448a64.06328,64.06328,0,0,1-64,64H160a64.06328,64.06328,0,0,1-64-64V176a79.974,79.974,0,0,1,80-80H288V32a32,32,0,0,1,64,0V96H464A79.974,79.974,0,0,1,544,176ZM264,256a40,40,0,1,0-40,40A39.997,39.997,0,0,0,264,256Zm-8,128H192v32h64Zm96,0H288v32h64ZM456,256a40,40,0,1,0-40,40A39.997,39.997,0,0,0,456,256Zm-8,128H384v32h64ZM640,256V384a31.96166,31.96166,0,0,1-32,32H576V224h32A31.96166,31.96166,0,0,1,640,256Z"></path></svg><div><b>AI kadang-kadang tersilap</b><p>Komputer mungkin salah dengar, terutama jika bilik bising. Jika kamu rasa bacaan kamu betul, tanya guru.</p></div></div>
+          <div class="note"><svg fill="currentColor" viewBox="0 0 512 512" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><path d="M466.5 83.7l-192-80a48.15 48.15 0 0 0-36.9 0l-192 80C27.7 91.1 16 108.6 16 128c0 198.5 114.5 335.7 221.5 380.3 11.8 4.9 25.1 4.9 36.9 0C360.1 472.6 496 349.3 496 128c0-19.4-11.7-36.9-29.5-44.3zM256.1 446.3l-.1-381 175.9 73.3c-3.3 151.4-82.1 261.1-175.8 307.7z"></path></svg><div><b>Notis privasi</b><p>Aplikasi ini <b>tidak menyimpan</b> suara atau teks bacaan kamu. Semasa kamu membaca, pelayar menghantar suara ke perkhidmatan pengecaman suaranya untuk ditukar menjadi teks. Nada suara dianalisis dalam peranti ini sahaja. Jangan sebut nama penuh atau maklumat peribadi.</p></div></div>
+          <div class="note alert" id="unsupportedNote" hidden><svg fill="currentColor" viewBox="0 0 576 512" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><path d="M569.517 440.013C587.975 472.007 564.806 512 527.94 512H48.054c-36.937 0-59.999-40.055-41.577-71.987L246.423 23.985c18.467-32.009 64.72-31.951 83.154 0l239.94 416.028zM288 354c-25.405 0-46 20.595-46 46s20.595 46 46 46 46-20.595 46-46-20.595-46-46-46zm-43.673-165.346l7.418 136c.347 6.364 5.609 11.346 11.982 11.346h48.546c6.373 0 11.635-4.982 11.982-11.346l7.418-136c.375-6.874-5.098-12.654-11.982-12.654h-63.383c-6.884 0-12.356 5.78-11.981 12.654z"></path></svg><div><b>Pelayar ini tidak menyokong pengecaman suara</b><p>Guna Google Chrome atau Microsoft Edge pada komputer. Kamu masih boleh mencuba Mod Demo.</p></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= CARA MENGGUNAKAN ================= -->
+    <section class="screen" id="s-cara" aria-labelledby="h-cara" hidden>
+      <h1 id="h-cara" tabindex="-1">Cara Menggunakan</h1>
+      <div class="steps">
+        <div class="step"><div class="n">1</div><b>Benarkan mikrofon</b><p>Tekan butang dan pilih "Benarkan" (Allow). Uji suara kamu dahulu.</p></div>
+        <div class="step"><div class="n">2</div><b>Tekan Mula Membaca</b><p>Baca petikan dengan lantang, jelas dan tidak terlalu laju.</p></div>
+        <div class="step"><div class="n">3</div><b>Berhenti di tanda baca</b><p>Berhenti sekejap di hujung ayat ( . ? ! ). Kad cadangan akan muncul.</p></div>
+        <div class="step"><div class="n">4</div><b>Cuba lagi</b><p>Tekan perkataan atau "Mari baca sekali lagi!" untuk berlatih semula.</p></div>
+        <div class="step"><div class="n">5</div><b>Tamat Membaca</b><p>Tekan Tamat Membaca. Mikrofon akan ditutup. Tunjukkan hasil kepada guru.</p></div>
+      </div>
+      <div class="panel" style="margin-top:16px">
+        <h3>Maksud tanda pada perkataan</h3>
+        <div class="legend" style="font-size:calc(15px*var(--fs))">
+          <span><i class="sw betul"></i>Garis penuh: didengar sama seperti petikan</span>
+          <span><i class="sw semak"></i>Garis titik + "?": semak perkataan ini</span>
+          <span><i class="sw kurangPasti"></i>Garis putus + "~": AI kurang pasti</span>
+          <span><i class="sw tinggal"></i>Kotak titik + "○": mungkin tertinggal</span>
+        </div>
+      </div>
+      <div class="btn-row"><button class="btn nav" type="button" data-act="home"><svg fill="currentColor" viewBox="0 0 448 512" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><path d="M257.5 445.1l-22.2 22.2c-9.4 9.4-24.6 9.4-33.9 0L7 273c-9.4-9.4-9.4-24.6 0-33.9L201.4 44.7c9.4-9.4 24.6-9.4 33.9 0l22.2 22.2c9.5 9.5 9.3 25-.4 34.3L136.6 216H424c13.3 0 24 10.7 24 24v32c0 13.3-10.7 24-24 24H136.6l120.5 114.8c9.8 9.3 10 24.8.4 34.3z"></path></svg>Kembali</button></div>
+    </section>
+
+    <!-- ================= PERSEDIAAN MIKROFON ================= -->
+    <section class="screen" id="s-mic" aria-labelledby="h-mic" hidden>
+      <h1 id="h-mic" tabindex="-1">Persediaan Mikrofon</h1>
+      <div class="grid2">
+        <div class="panel">
+          <h2>Mengapa perlu mikrofon?</h2>
+          <p style="color:var(--body);line-height:1.5;margin-top:0">Komputer perlu mendengar bacaan kamu untuk memberi cadangan. Mikrofon hanya dihidupkan selepas kamu menekan butang, dan ditutup apabila kamu tekan <b>Tamat Membaca</b>.</p>
+          <button class="btn primary" type="button" data-act="allowmic" id="btnAllow"><svg fill="currentColor" viewBox="0 0 352 512" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><path d="M176 352c53.02 0 96-42.98 96-96V96c0-53.02-42.98-96-96-96S80 42.98 80 96v160c0 53.02 42.98 96 96 96zm160-160h-16c-8.84 0-16 7.16-16 16v48c0 74.8-64.49 134.82-140.79 127.38C96.71 376.89 48 317.11 48 250.3V208c0-8.84-7.16-16-16-16H16c-8.84 0-16 7.16-16 16v40.16c0 89.64 63.97 169.55 152 181.69V464H96c-8.84 0-16 7.16-16 16v16c0 8.84 7.16 16 16 16h160c8.84 0 16-7.16 16-16v-16c0-8.84-7.16-16-16-16h-56v-33.77C285.71 418.47 352 344.9 352 256v-48c0-8.84-7.16-16-16-16z"></path></svg>Benarkan Mikrofon</button>
+          <div id="micTest" hidden>
+            <h3 style="margin:16px 0 4px">Uji mikrofon</h3>
+            <p style="margin:0;color:var(--body)">Sebut: <b>"Saya sedia membaca."</b></p>
+            <div class="meter" role="meter" aria-label="Paras suara" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="meter"><i></i></div>
+            <div class="check" id="micOk" hidden><svg fill="currentColor" viewBox="0 0 512 512" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z"></path></svg>Suara kamu dapat didengar!</div>
+            <div class="btn-row"><button class="btn primary big" type="button" data-act="toread" id="btnToRead"><svg fill="currentColor" viewBox="0 0 448 512" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><path d="M424.4 214.7L72.4 6.6C43.8-10.3 0 6.1 0 47.9V464c0 37.5 40.7 60.1 72.4 41.3l352-208c31.4-18.5 31.5-64.1 0-82.6z"></path></svg>Mula Membaca</button></div>
+          </div>
+        </div>
+        <div class="notes">
+          <div class="note alert" id="deniedNote" hidden><svg fill="currentColor" viewBox="0 0 448 512" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><path d="M400 224h-24v-72C376 68.2 307.8 0 224 0S72 68.2 72 152v72H48c-26.5 0-48 21.5-48 48v192c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V272c0-26.5-21.5-48-48-48zm-104 0H152v-72c0-39.7 32.3-72 72-72s72 32.3 72 72v72z"></path></svg><div><b>Mikrofon tidak dibenarkan</b><p id="deniedText">Jangan risau! Minta bantuan guru:</p>
+            <ol class="help" id="deniedSteps">
+              <li>Klik ikon mangga 🔒 di sebelah alamat laman.</li>
+              <li>Cari "Mikrofon" dan pilih "Benarkan" (Allow).</li>
+              <li>Muat semula halaman, kemudian cuba lagi.</li>
+            </ol></div></div>
+          <div class="note alert" id="policyNote" hidden><svg fill="currentColor" viewBox="0 0 512 512" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><path d="M256 8C119.034 8 8 119.033 8 256s111.034 248 248 248 248-111.034 248-248S392.967 8 256 8zm130.108 117.892c65.448 65.448 70 165.481 20.677 235.637L150.47 105.216c70.204-49.356 170.226-44.735 235.638 20.676zM125.892 386.108c-65.448-65.448-70-165.481-20.677-235.637L361.53 406.784c-70.203 49.356-170.226 44.736-235.638-20.676z"></path></svg><div><b>Halaman ini menyekat mikrofon</b><p>Tetapan halaman (contohnya bingkai dalam Canva) tidak membenarkan mikrofon. Guru: lihat bahagian "Jika mikrofon disekat" dalam panduan. Murid boleh mencuba Mod Demo.</p></div></div>
+          <div class="note"><svg fill="currentColor" viewBox="0 0 512 512" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><path d="M256 32C114.52 32 0 146.496 0 288v48a32 32 0 0 0 17.689 28.622l14.383 7.191C34.083 431.903 83.421 480 144 480h24c13.255 0 24-10.745 24-24V280c0-13.255-10.745-24-24-24h-24c-31.342 0-59.671 12.879-80 33.627V288c0-105.869 86.131-192 192-192s192 86.131 192 192v1.627C427.671 268.879 399.342 256 368 256h-24c-13.255 0-24 10.745-24 24v176c0 13.255 10.745 24 24 24h24c60.579 0 109.917-48.098 111.928-108.187l14.382-7.191A32 32 0 0 0 512 336v-48c0-141.479-114.496-256-256-256z"></path></svg><div><b>Petua</b><p>Duduk di tempat yang senyap. Dekatkan mulut kira-kira sejengkal dari mikrofon.</p></div></div>
+          <div class="btn-row"><button class="btn nav" type="button" data-act="home"><svg fill="currentColor" viewBox="0 0 448 512" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><path d="M257.5 445.1l-22.2 22.2c-9.4 9.4-24.6 9.4-33.9 0L7 273c-9.4-9.4-9.4-24.6 0-33.9L201.4 44.7c9.4-9.4 24.6-9.4 33.9 0l22.2 22.2c9.5 9.5 9.3 25-.4 34.3L136.6 216H424c13.3 0 24 10.7 24 24v32c0 13.3-10.7 24-24 24H136.6l120.5 114.8c9.8 9.3 10 24.8.4 34.3z"></path></svg>Kembali</button></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= MEMBACA ================= -->
+    <section class="screen" id="s-baca" aria-labelledby="h-baca" hidden>
+      <h1 id="h-baca" tabindex="-1" class="sr">Membaca petikan</h1>
+      <div class="controls">
+        <button class="btn rec big" type="button" data-act="session" id="btnSession"><svg fill="currentColor" viewBox="0 0 352 512" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><path d="M176 352c53.02 0 96-42.98 96-96V96c0-53.02-42.98-96-96-96S80 42.98 80 96v160c0 53.02 42.98 96 96 96zm160-160h-16c-8.84 0-16 7.16-16 16v48c0 74.8-64.49 134.82-140.79 127.38C96.71 376.89 48 317.11 48 250.3V208c0-8.84-7.16-16-16-16H16c-8.84 0-16 7.16-16 16v40.16c0 89.64 63.97 169.55 152 181.69V464H96c-8.84 0-16 7.16-16 16v16c0 8.84 7.16 16 16 16h160c8.84 0 16-7.16 16-16v-16c0-8.84-7.16-16-16-16h-56v-33.77C285.71 418.47 352 344.9 352 256v-48c0-8.84-7.16-16-16-16z"></path></svg><span>Mula Membaca</span></button>
+        <span class="timer" id="timer" aria-label="Masa sesi">0:00</span>
+        <button class="btn nav small" type="button" data-act="home" id="btnBacaHome"><svg fill="currentColor" viewBox="0 0 448 512" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><path d="M257.5 445.1l-22.2 22.2c-9.4 9.4-24.6 9.4-33.9 0L7 273c-9.4-9.4-9.4-24.6 0-33.9L201.4 44.7c9.4-9.4 24.6-9.4 33.9 0l22.2 22.2c9.5 9.5 9.3 25-.4 34.3L136.6 216H424c13.3 0 24 10.7 24 24v32c0 13.3-10.7 24-24 24H136.6l120.5 114.8c9.8 9.3 10 24.8.4 34.3z"></path></svg>Skrin Utama</button>
+      </div>
+      <div class="repeat-banner" id="repeatBanner" hidden><span id="repeatText"></span><button class="btn light small" type="button" data-act="exitrepeat"><svg fill="currentColor" viewBox="0 0 352 512" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><path d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"></path></svg>Kembali ke petikan penuh</button></div>
+      <div class="read-wrap">
+        <div>
+          <div class="panel passage">
+            <h2><svg fill="currentColor" viewBox="0 0 576 512" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><path d="M542.22 32.05c-54.8 3.11-163.72 14.43-230.96 55.59-4.64 2.84-7.27 7.89-7.27 13.17v363.87c0 11.55 12.63 18.85 23.28 13.49 69.18-34.82 169.23-44.32 218.7-46.92 16.89-.89 30.02-14.43 30.02-30.66V62.75c.01-17.71-15.35-31.74-33.77-30.7zM264.73 87.64C197.5 46.48 88.58 35.17 33.78 32.05 15.36 31.01 0 45.04 0 62.75V400.6c0 16.24 13.13 29.78 30.02 30.66 49.49 2.6 149.59 12.11 218.77 46.95 10.62 5.35 23.21-1.94 23.21-13.46V100.63c0-5.29-2.62-10.14-7.27-12.99z"></path></svg><span id="passageTitle"></span></h2>
+            <div id="passage"></div>
+            <div class="legend" aria-hidden="true">
+              <span><i class="sw betul"></i>didengar sama</span><span><i class="sw semak"></i>? semak</span><span><i class="sw kurangPasti"></i>~ AI kurang pasti</span><span><i class="sw tinggal"></i>○ mungkin tertinggal</span>
+            </div>
+            <div class="heard" aria-live="off"><small>APA YANG DIDENGAR OLEH KOMPUTER</small><p id="heardText"><span class="interim">Tekan Mula Membaca, kemudian baca dengan lantang.</span></p></div>
+          </div>
+        </div>
+        <div class="fb-col" id="fbCol">
+          <h2>Kad Cadangan</h2>
+          <div class="fb-empty" id="fbEmpty">Kad akan muncul apabila kamu berhenti di hujung ayat. Kamu tidak akan diganggu semasa membaca.</div>
+          <div id="fbList" class="fb-col" aria-live="polite"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= TAMAT ================= -->
+    <section class="screen" id="s-tamat" aria-labelledby="h-tamat" hidden>
+      <h1 id="h-tamat" tabindex="-1">Syabas! Sesi tamat.</h1>
+      <p class="lead" id="endLead">Mikrofon sudah ditutup. Ini cadangan untuk kamu.</p>
+      <div class="end-grid">
+        <div class="end-card good"><h2><svg fill="currentColor" viewBox="0 0 576 512" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><path d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"></path></svg>Apa yang kamu sudah buat dengan baik?</h2><div id="endGood"></div></div>
+        <div class="end-card try"><h2><svg fill="currentColor" viewBox="0 0 512 512" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><path d="M500.33 0h-47.41a12 12 0 0 0-12 12.57l4 82.76A247.42 247.42 0 0 0 256 8C119.34 8 7.9 119.53 8 256.19 8.1 393.07 119.1 504 256 504a247.1 247.1 0 0 0 166.18-63.91 12 12 0 0 0 .48-17.43l-34-34a12 12 0 0 0-16.38-.55A176 176 0 1 1 402.1 157.8l-101.53-4.87a12 12 0 0 0-12.57 12v47.41a12 12 0 0 0 12 12h200.33a12 12 0 0 0 12-12V12a12 12 0 0 0-12-12z"></path></svg>Apa yang boleh kamu cuba lagi?</h2><div id="endTry"></div></div>
+        <div class="end-card again"><h2><svg fill="currentColor" viewBox="0 0 576 512" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><path d="M542.22 32.05c-54.8 3.11-163.72 14.43-230.96 55.59-4.64 2.84-7.27 7.89-7.27 13.17v363.87c0 11.55 12.63 18.85 23.28 13.49 69.18-34.82 169.23-44.32 218.7-46.92 16.89-.89 30.02-14.43 30.02-30.66V62.75c.01-17.71-15.35-31.74-33.77-30.7zM264.73 87.64C197.5 46.48 88.58 35.17 33.78 32.05 15.36 31.01 0 45.04 0 62.75V400.6c0 16.24 13.13 29.78 30.02 30.66 49.49 2.6 149.59 12.11 218.77 46.95 10.62 5.35 23.21-1.94 23.21-13.46V100.63c0-5.29-2.62-10.14-7.27-12.99z"></path></svg>Mari baca sekali lagi!</h2><div id="endAgain"></div></div>
+      </div>
+      <div class="panel teacher">
+        <h3><svg fill="currentColor" viewBox="0 0 640 512" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><path d="M208 352c-2.39 0-4.78.35-7.06 1.09C187.98 357.3 174.35 360 160 360c-14.35 0-27.98-2.7-40.95-6.91-2.28-.74-4.66-1.09-7.05-1.09C49.94 352-.33 402.48 0 464.62.14 490.88 21.73 512 48 512h224c26.27 0 47.86-21.12 48-47.38.33-62.14-49.94-112.62-112-112.62zm-48-32c53.02 0 96-42.98 96-96s-42.98-96-96-96-96 42.98-96 96 42.98 96 96 96zM592 0H208c-26.47 0-48 22.25-48 49.59V96c23.42 0 45.1 6.78 64 17.8V64h352v288h-64v-64H384v64h-76.24c19.1 16.69 33.12 38.73 39.69 64H592c26.47 0 48-22.25 48-49.59V49.59C640 22.25 618.47 0 592 0z"></path></svg> Semakan Guru <small style="font-weight:normal;color:var(--muted)">(tidak disimpan — guru menilai sendiri)</small></h3>
+        <table><tbody id="teacherRows"></tbody></table>
+      </div>
+      <div class="btn-row">
+        <button class="btn primary" type="button" data-act="again"><svg fill="currentColor" viewBox="0 0 512 512" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><path d="M500.33 0h-47.41a12 12 0 0 0-12 12.57l4 82.76A247.42 247.42 0 0 0 256 8C119.34 8 7.9 119.53 8 256.19 8.1 393.07 119.1 504 256 504a247.1 247.1 0 0 0 166.18-63.91 12 12 0 0 0 .48-17.43l-34-34a12 12 0 0 0-16.38-.55A176 176 0 1 1 402.1 157.8l-101.53-4.87a12 12 0 0 0-12.57 12v47.41a12 12 0 0 0 12 12h200.33a12 12 0 0 0 12-12V12a12 12 0 0 0-12-12z"></path></svg>Cuba Lagi</button>
+        <button class="btn light" type="button" data-act="topassage"><svg fill="currentColor" viewBox="0 0 576 512" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><path d="M542.22 32.05c-54.8 3.11-163.72 14.43-230.96 55.59-4.64 2.84-7.27 7.89-7.27 13.17v363.87c0 11.55 12.63 18.85 23.28 13.49 69.18-34.82 169.23-44.32 218.7-46.92 16.89-.89 30.02-14.43 30.02-30.66V62.75c.01-17.71-15.35-31.74-33.77-30.7zM264.73 87.64C197.5 46.48 88.58 35.17 33.78 32.05 15.36 31.01 0 45.04 0 62.75V400.6c0 16.24 13.13 29.78 30.02 30.66 49.49 2.6 149.59 12.11 218.77 46.95 10.62 5.35 23.21-1.94 23.21-13.46V100.63c0-5.29-2.62-10.14-7.27-12.99z"></path></svg>Kembali ke Petikan</button>
+        <button class="btn nav" type="button" data-act="map"><svg fill="currentColor" viewBox="0 0 576 512" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><path d="M288 0c-69.59 0-126 56.41-126 126 0 56.26 82.35 158.8 113.9 196.02 6.39 7.54 17.82 7.54 24.2 0C331.65 284.8 414 182.26 414 126 414 56.41 357.59 0 288 0zm0 168c-23.2 0-42-18.8-42-42s18.8-42 42-42 42 18.8 42 42-18.8 42-42 42zM20.12 215.95A32.006 32.006 0 0 0 0 245.66v250.32c0 11.32 11.43 19.06 21.94 14.86L160 448V214.92c-8.84-15.98-16.07-31.54-21.25-46.42L20.12 215.95zM288 359.67c-14.07 0-27.38-6.18-36.51-16.96-19.66-23.2-40.57-49.62-59.49-76.72v182l192 64V266c-18.92 27.09-39.82 53.52-59.49 76.72-9.13 10.77-22.44 16.95-36.51 16.95zm266.06-198.51L416 224v288l139.88-55.95A31.996 31.996 0 0 0 576 426.34V176.02c0-11.32-11.43-19.06-21.94-14.86z"></path></svg>Kembali ke Peta Pulau</button>
+      </div>
+    </section>
+  </main>
+
+  <div class="dialog" id="dialog" hidden>
+    <div class="panel" role="dialog" aria-modal="true" aria-labelledby="dlgTitle">
+      <h2 id="dlgTitle"></h2>
+      <div id="dlgBody" style="color:var(--body);line-height:1.5"></div>
+      <div class="btn-row" id="dlgBtns"></div>
+    </div>
+  </div>
+</div>
+<script>/* =====================================================================
+ *  TETAPAN GURU — ubah bahagian ini sahaja untuk menukar petikan.
+ *  - Setiap baris dalam "petikan" ialah satu perenggan.
+ *  - Pastikan ada ayat yang berakhir dengan . ? dan !
+ *  - Jangan ubah kod di bawah bahagian ini.
+ * ===================================================================== */
+window.P3_CONFIG = {
+  tajukPetikan: 'Petua Kejayaan',
+  petikan: [
+    'Zara di perpustakaan. Dia membaca maklumat penting tentang petua kejayaan murid cemerlang.',
+    'Apakah murid-murid sudah bersedia untuk menjadi murid cemerlang? Terdapat banyak cara seperti yang dinyatakan di bawah.',
+    'Saya sentiasa jujur dan menjaga tingkah laku dalam pertuturan serta perbuatan. Inilah sikap amanah yang perlu ada dalam diri setiap murid.',
+    'Wah, petua ini sangat bagus! Saya perlu bijak mengurus diri, masa serta melakukan aktiviti yang berfaedah. Petua ini dapat menjadikan kita murid yang hebat.',
+    'Bagaimanakah kamu menjaga kesihatan? Saya memastikan diri sentiasa cergas. Kesihatan mental dan fizikal perlulah dijaga dengan baiknya. Murid perlu mengambil makanan seimbang dan bersenam.',
+    'Saya perlu menjadi seorang yang berdedikasi tinggi. Saya juga bertanggungjawab terhadap tugas yang diberikan. Oleh itu, tugasan yang diberikan oleh guru perlu disiapkan mengikut masa.',
+  ],
+  bahasa: 'ms-MY',            // kod bahasa pengecaman suara
+  hadSesiMinit: 6,            // sesi tamat secara automatik selepas tempoh ini
+  senyapJedaSaat: 40,         // sesi dijeda jika tiada suara selama ini
+  ambangKurangPasti: 0.5,     // keyakinan pengecam di bawah nilai ini -> "AI kurang pasti"
+  pautanPeta: '',             // (pilihan) pautan peta jika modul dibuka di luar Canva
+};
+</script>
+<script>/* Pulau 3 — penjajaran perkataan (word alignment).
+ * Membandingkan apa yang DIDENGAR oleh pengecam suara dengan petikan sasaran.
+ * Hasilnya ialah "perkara untuk disemak", BUKAN keputusan sebutan yang muktamad.
+ * Pure functions: no DOM, no network. Works in browser (window.P3Align) and Node (module.exports). */
+(function (root) {
+  'use strict';
+
+  // ---------- normalisation ----------
+  function norm(w) {
+    return String(w || '')
+      .toLowerCase()
+      .normalize('NFKD').replace(/[̀-ͯ]/g, '')
+      .replace(/[“”"'‘’`]/g, '')
+      .replace(/[^a-z0-9\-]/g, '')
+      .replace(/-+/g, '');                 // "murid-murid" -> "muridmurid"
+  }
+  function tokenizeHeard(text) {
+    return String(text || '')
+      .replace(/[‐-―]/g, '-')
+      .split(/[\s,.;:!?()]+/)
+      .map(function (t) { return { raw: t, n: norm(t) }; })
+      .filter(function (t) { return t.n.length > 0; });
+  }
+
+  // Split passage into sentences and words, keeping the original punctuation for display.
+  function parsePassage(paragraphs) {
+    var words = [], sentences = [];
+    (paragraphs || []).forEach(function (para, pi) {
+      var parts = String(para).match(/[^.!?]+[.!?]+["'”’)]*|[^.!?]+$/g) || [];
+      parts.forEach(function (sTxt) {
+        var text = sTxt.trim(); if (!text) return;
+        var endMark = (text.match(/[.!?](?=["'”’)]*$)/) || ['.'])[0];
+        var sIdx = sentences.length;
+        var sent = { index: sIdx, paragraph: pi, text: text, mark: endMark, first: words.length, last: -1 };
+        text.split(/\s+/).forEach(function (raw) {
+          var n = norm(raw);
+          if (!n) return;
+          words.push({ index: words.length, raw: raw, n: n, sentence: sIdx, paragraph: pi });
+        });
+        sent.last = words.length - 1;
+        if (sent.last >= sent.first) sentences.push(sent);
+      });
+    });
+    return { words: words, sentences: sentences };
+  }
+
+  // ---------- similarity ----------
+  function lev(a, b) {
+    if (a === b) return 0;
+    var m = a.length, n = b.length; if (!m) return n; if (!n) return m;
+    var prev = new Array(n + 1), cur = new Array(n + 1), i, j;
+    for (j = 0; j <= n; j++) prev[j] = j;
+    for (i = 1; i <= m; i++) {
+      cur[0] = i;
+      for (j = 1; j <= n; j++) {
+        cur[j] = Math.min(prev[j] + 1, cur[j - 1] + 1, prev[j - 1] + (a.charCodeAt(i - 1) === b.charCodeAt(j - 1) ? 0 : 1));
+      }
+      var t = prev; prev = cur; cur = t;
+    }
+    return prev[n];
+  }
+  function sim(a, b) {
+    if (a === b) return 1;
+    var L = Math.max(a.length, b.length); if (!L) return 1;
+    return 1 - lev(a, b) / L;
+  }
+
+  // ---------- alignment ----------
+  // Semi-global alignment: pupil starts at the beginning of the target but may not have reached the end yet.
+  // Operations: match/near/sub (1:1), merge (2 heard -> 1 target, e.g. "murid murid" -> "murid-murid"),
+  // del (target word not heard = possible omission), ins (extra heard word = repetition or addition).
+  var COST = { near: 0.6, sub: 1.0, del: 1.0, ins: 1.1 };
+  var NEAR = 0.72;
+
+  function pairCost(h, t) {
+    var s = sim(h, t);
+    if (s === 1) return { c: 0, kind: 'match', s: s };
+    if (s >= NEAR) return { c: COST.near, kind: 'near', s: s };
+    return { c: COST.sub, kind: 'sub', s: s };
+  }
+
+  function align(target, heard) {
+    var m = target.length, n = heard.length;
+    var INF = 1e9, D = [], B = [], i, j;
+    for (i = 0; i <= m; i++) { D.push(new Float64Array(n + 1)); B.push(new Array(n + 1)); }
+    for (j = 0; j <= n; j++) { D[0][j] = j * COST.ins; B[0][j] = j ? 'ins' : null; }
+    for (i = 1; i <= m; i++) { D[i][0] = i * COST.del; B[i][0] = 'del'; }
+    for (i = 1; i <= m; i++) {
+      for (j = 1; j <= n; j++) {
+        var pc = pairCost(heard[j - 1].n, target[i - 1].n);
+        var best = D[i - 1][j - 1] + pc.c, op = pc.kind;
+        if (D[i - 1][j] + COST.del < best) { best = D[i - 1][j] + COST.del; op = 'del'; }
+        if (D[i][j - 1] + COST.ins < best) { best = D[i][j - 1] + COST.ins; op = 'ins'; }
+        if (j >= 2) {
+          var merged = heard[j - 2].n + heard[j - 1].n, ms = sim(merged, target[i - 1].n);
+          var mc = ms === 1 ? 0.05 : ms >= NEAR ? COST.near + 0.05 : INF;
+          if (D[i - 1][j - 2] + mc < best) { best = D[i - 1][j - 2] + mc; op = ms === 1 ? 'merge' : 'mergeNear'; }
+        }
+        D[i][j] = best; B[i][j] = op;
+      }
+    }
+    // free end gap on the target: the pupil may stop part-way. Choose the best row for the full heard sequence.
+    var bestI = 0, bestV = INF;
+    for (i = 0; i <= m; i++) {
+      if (D[i][n] < bestV - 1e-9) { bestV = D[i][n]; bestI = i; } // earliest position wins ties
+    }
+    // backtrack
+    var ops = []; i = bestI; j = n;
+    while (i > 0 || j > 0) {
+      var op2 = B[i][j];
+      if (op2 === 'ins' || (i === 0)) { ops.push({ op: 'ins', h: j - 1 }); j--; }
+      else if (op2 === 'del' || j === 0) { ops.push({ op: 'del', t: i - 1 }); i--; }
+      else if (op2 === 'merge' || op2 === 'mergeNear') { ops.push({ op: op2 === 'merge' ? 'match' : 'near', t: i - 1, h: j - 1, h2: j - 2 }); i--; j -= 2; }
+      else { ops.push({ op: op2, t: i - 1, h: j - 1 }); i--; j--; }
+    }
+    ops.reverse();
+    return { ops: ops, reached: bestI - 1 };
+  }
+
+  /**
+   * Analyse what was heard against the passage.
+   * @param {object} parsed  result of parsePassage
+   * @param {Array<{text:string, confidence:number|null, final:boolean}>} segments recognised segments in order
+   * @param {object} [opt] { range:[firstWord,lastWord] to restrict to one sentence, lowConf:0.5 }
+   */
+  function analyse(parsed, segments, opt) {
+    opt = opt || {};
+    var lowConf = opt.lowConf == null ? 0.5 : opt.lowConf;
+    var lo = opt.range ? opt.range[0] : 0, hi = opt.range ? opt.range[1] : parsed.words.length - 1;
+    var target = parsed.words.slice(lo, hi + 1);
+    var heard = [];
+    (segments || []).forEach(function (seg, si) {
+      tokenizeHeard(seg.text).forEach(function (t) {
+        heard.push({ raw: t.raw, n: t.n, conf: seg.confidence, final: !!seg.final, seg: si });
+      });
+    });
+    var res = align(target, heard);
+    var status = target.map(function (w) { return { index: w.index, state: 'belum', heard: null, conf: null }; });
+    var extras = [];
+    res.ops.forEach(function (o) {
+      if (o.op === 'ins') {
+        var hw = heard[o.h];
+        extras.push({ raw: hw.raw, n: hw.n, after: null, h: o.h });
+        return;
+      }
+      var st = status[o.t];
+      if (o.op === 'del') { st.state = 'tinggal'; return; }
+      var hw2 = heard[o.h], heardRaw = o.h2 != null ? heard[o.h2].raw + ' ' + hw2.raw : hw2.raw;
+      var conf = hw2.conf;
+      st.heard = heardRaw; st.conf = conf; st.final = hw2.final;
+      if (o.op === 'match') st.state = 'betul';
+      else {
+        var uncertain = conf != null && conf > 0 && conf < lowConf;
+        st.state = uncertain ? 'kurangPasti' : (o.op === 'near' ? 'semak' : 'lain');
+      }
+    });
+    // words after the furthest reached target word are "not yet read", not omissions
+    var reached = res.reached;
+    for (var k = reached + 1; k < status.length; k++) { status[k].state = 'belum'; status[k].heard = null; }
+    // classify extras: repetition if it equals a neighbouring target word
+    var lastT = -1, hToT = {};
+    res.ops.forEach(function (o) { if (o.t != null) lastT = o.t; if (o.op === 'ins') hToT[o.h] = lastT; });
+    extras.forEach(function (e) {
+      var tIdx = hToT[e.h] == null ? -1 : hToT[e.h];
+      var near = [tIdx, tIdx + 1].filter(function (x) { return x >= 0 && x < target.length; });
+      var rep = near.filter(function (x) { return sim(target[x].n, e.n) >= NEAR; })[0];
+      e.kind = rep != null ? 'ulang' : 'tambah';
+      var at = rep != null ? rep : (tIdx >= 0 ? tIdx : (target.length ? 0 : -1));
+      e.after = at >= 0 ? target[at].index : null;   // target word this extra sits next to
+    });
+    // sentence completion
+    var sentencesDone = parsed.sentences.filter(function (s) {
+      if (s.last < lo || s.first > hi) return false;
+      return s.last - lo <= reached;
+    }).map(function (s) { return s.index; });
+    return {
+      words: status, extras: extras, reachedWord: reached >= 0 ? target[reached].index : lo - 1,
+      sentencesDone: sentencesDone, heardCount: heard.length,
+    };
+  }
+
+  // Child-friendly summary for one sentence. Never claims a definite pronunciation error.
+  function sentenceFeedback(parsed, analysis, sentenceIndex) {
+    var s = parsed.sentences[sentenceIndex];
+    var ws = analysis.words.filter(function (w) { return parsed.words[w.index].sentence === sentenceIndex; });
+    var good = ws.filter(function (w) { return w.state === 'betul'; });
+    var check = ws.filter(function (w) { return w.state === 'semak' || w.state === 'lain'; });
+    var unsure = ws.filter(function (w) { return w.state === 'kurangPasti'; });
+    var missed = ws.filter(function (w) { return w.state === 'tinggal'; });
+    var reps = analysis.extras.filter(function (e) { return e.kind === 'ulang' && e.after != null && parsed.words[e.after] && parsed.words[e.after].sentence === sentenceIndex; });
+    var longestGood = good.map(function (w) { return parsed.words[w.index].raw.replace(/[.,!?;:"“”]/g, ''); })
+      .sort(function (a, b) { return b.length - a.length; })[0] || null;
+    return {
+      sentence: s, total: ws.length,
+      allClear: check.length === 0 && unsure.length === 0 && missed.length === 0,
+      goodExample: longestGood,
+      toCheck: check.map(function (w) { return { index: w.index, word: parsed.words[w.index].raw, heard: w.heard }; }),
+      unsure: unsure.map(function (w) { return { index: w.index, word: parsed.words[w.index].raw, heard: w.heard }; }),
+      missed: missed.map(function (w) { return { index: w.index, word: parsed.words[w.index].raw }; }),
+      repeats: reps.map(function (e) { return e.raw; }),
+    };
+  }
+
+  var api = { norm: norm, tokenizeHeard: tokenizeHeard, parsePassage: parsePassage, sim: sim, align: align, analyse: analyse, sentenceFeedback: sentenceFeedback };
+  root.P3Align = api;
+  if (typeof module !== 'undefined' && module.exports) module.exports = api;
+})(typeof window !== 'undefined' ? window : globalThis);
+</script>
+<script>/* Pulau 3 — pengesan nada dalam peranti (on-device pitch tracker).
+ * Runs locally on the microphone signal; no audio leaves the device for this part.
+ * Output is a TENTATIVE description of the end-of-sentence pitch movement, not a validated assessment. */
+(function (root) {
+  'use strict';
+
+  // Normalised autocorrelation pitch estimate for one frame. Returns {f0, clarity, rms}.
+  function detect(buf, sampleRate, minHz, maxHz) {
+    minHz = minHz || 75; maxHz = maxHz || 500;
+    var n = buf.length, i, rms = 0, mean = 0;
+    for (i = 0; i < n; i++) mean += buf[i];
+    mean /= n;
+    for (i = 0; i < n; i++) { var v = buf[i] - mean; rms += v * v; }
+    rms = Math.sqrt(rms / n);
+    if (rms < 0.008) return { f0: 0, clarity: 0, rms: rms };
+    var minLag = Math.floor(sampleRate / maxHz), maxLag = Math.min(Math.floor(sampleRate / minHz), n - 2);
+    var bestLag = -1, bestR = 0, r = new Float32Array(maxLag + 2);
+    for (var lag = minLag; lag <= maxLag + 1; lag++) {
+      var num = 0, e1 = 0, e2 = 0;
+      for (i = 0; i + lag < n; i++) {
+        var a = buf[i] - mean, b = buf[i + lag] - mean;
+        num += a * b; e1 += a * a; e2 += b * b;
+      }
+      r[lag] = e1 && e2 ? num / Math.sqrt(e1 * e2) : 0;
+    }
+    // first strong peak (avoids octave errors from picking a later multiple)
+    var thresh = 0.6;
+    for (lag = minLag + 1; lag <= maxLag; lag++) {
+      if (r[lag] > thresh && r[lag] >= r[lag - 1] && r[lag] >= r[lag + 1]) { bestLag = lag; bestR = r[lag]; break; }
+    }
+    if (bestLag < 0) {
+      for (lag = minLag; lag <= maxLag; lag++) if (r[lag] > bestR) { bestR = r[lag]; bestLag = lag; }
+      if (bestR < 0.5) return { f0: 0, clarity: bestR, rms: rms };
+    }
+    // parabolic interpolation
+    var y0 = r[bestLag - 1] || 0, y1 = r[bestLag], y2 = r[bestLag + 1] || 0;
+    var denom = y0 - 2 * y1 + y2, shift = denom ? 0.5 * (y0 - y2) / denom : 0;
+    var period = bestLag + Math.max(-0.5, Math.min(0.5, shift));
+    return { f0: sampleRate / period, clarity: bestR, rms: rms };
+  }
+
+  // Take frames [{t (s), f0 (Hz, 0 = unvoiced)}] and return the last voiced stretch ending before tEnd.
+  function lastVoicedRun(frames, tEnd, maxGap) {
+    maxGap = maxGap || 0.25;
+    var run = [], lastT = null;
+    for (var i = frames.length - 1; i >= 0; i--) {
+      var f = frames[i];
+      if (f.t > tEnd) continue;
+      if (!f.f0) { if (run.length && lastT - f.t > maxGap) break; continue; }
+      if (run.length && lastT - f.t > maxGap) break;
+      run.push(f); lastT = f.t;
+    }
+    return run.reverse();
+  }
+
+  function median(a) { var s = a.slice().sort(function (x, y) { return x - y; }); var k = s.length >> 1; return s.length % 2 ? s[k] : (s[k - 1] + s[k]) / 2; }
+
+  /* Describe the pitch movement at the end of the last voiced stretch.
+   * Returns null if there is not enough voiced audio. Labels: 'naik' | 'turun' | 'datar'. */
+  function endContour(frames, tEnd, opts) {
+    opts = opts || {};
+    var tail = opts.tail || 0.6;
+    var run = lastVoicedRun(frames, tEnd);
+    if (run.length < 6) return null;
+    var tLast = run[run.length - 1].t;
+    var seg = run.filter(function (f) { return f.t >= tLast - tail; });
+    if (seg.length < 5) return null;
+    // semitones relative to the median of the whole run; remove octave jumps
+    var ref = median(run.map(function (f) { return f.f0; }));
+    var pts = seg.map(function (f) { return { t: f.t, st: 12 * Math.log2(f.f0 / ref) }; })
+      .filter(function (p) { return Math.abs(p.st) < 9; });
+    if (pts.length < 5) return null;
+    // robust: compare median of first third vs last third, plus least-squares slope
+    var k = Math.max(2, Math.floor(pts.length / 3));
+    var startM = median(pts.slice(0, k).map(function (p) { return p.st; }));
+    var endM = median(pts.slice(-k).map(function (p) { return p.st; }));
+    var change = endM - startM;
+    var label = change > 1.5 ? 'naik' : change < -1.5 ? 'turun' : 'datar';
+    return {
+      label: label, changeSt: Math.round(change * 10) / 10,
+      points: run.map(function (f) { return { t: f.t - run[0].t, st: 12 * Math.log2(f.f0 / ref) }; }),
+      duration: tLast - run[0].t,
+    };
+  }
+
+  var api = { detect: detect, lastVoicedRun: lastVoicedRun, endContour: endContour };
+  root.P3Pitch = api;
+  if (typeof module !== 'undefined' && module.exports) module.exports = api;
+})(typeof window !== 'undefined' ? window : globalThis);
+</script>
+<script>window.P3_ICONS={"FaMicrophoneSlash":"<svg fill=\"currentColor\" viewBox=\"0 0 640 512\" aria-hidden=\"true\" focusable=\"false\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M633.82 458.1l-157.8-121.96C488.61 312.13 496 285.01 496 256v-48c0-8.84-7.16-16-16-16h-16c-8.84 0-16 7.16-16 16v48c0 17.92-3.96 34.8-10.72 50.2l-26.55-20.52c3.1-9.4 5.28-19.22 5.28-29.67V96c0-53.02-42.98-96-96-96s-96 42.98-96 96v45.36L45.47 3.37C38.49-2.05 28.43-.8 23.01 6.18L3.37 31.45C-2.05 38.42-.8 48.47 6.18 53.9l588.36 454.73c6.98 5.43 17.03 4.17 22.46-2.81l19.64-25.27c5.41-6.97 4.16-17.02-2.82-22.45zM400 464h-56v-33.77c11.66-1.6 22.85-4.54 33.67-8.31l-50.11-38.73c-6.71.4-13.41.87-20.35.2-55.85-5.45-98.74-48.63-111.18-101.85L144 241.31v6.85c0 89.64 63.97 169.55 152 181.69V464h-56c-8.84 0-16 7.16-16 16v16c0 8.84 7.16 16 16 16h160c8.84 0 16-7.16 16-16v-16c0-8.84-7.16-16-16-16z\"></path></svg>","FaMicrophone":"<svg fill=\"currentColor\" viewBox=\"0 0 352 512\" aria-hidden=\"true\" focusable=\"false\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M176 352c53.02 0 96-42.98 96-96V96c0-53.02-42.98-96-96-96S80 42.98 80 96v160c0 53.02 42.98 96 96 96zm160-160h-16c-8.84 0-16 7.16-16 16v48c0 74.8-64.49 134.82-140.79 127.38C96.71 376.89 48 317.11 48 250.3V208c0-8.84-7.16-16-16-16H16c-8.84 0-16 7.16-16 16v40.16c0 89.64 63.97 169.55 152 181.69V464H96c-8.84 0-16 7.16-16 16v16c0 8.84 7.16 16 16 16h160c8.84 0 16-7.16 16-16v-16c0-8.84-7.16-16-16-16h-56v-33.77C285.71 418.47 352 344.9 352 256v-48c0-8.84-7.16-16-16-16z\"></path></svg>","FaSyncAlt":"<svg fill=\"currentColor\" viewBox=\"0 0 512 512\" aria-hidden=\"true\" focusable=\"false\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M370.72 133.28C339.458 104.008 298.888 87.962 255.848 88c-77.458.068-144.328 53.178-162.791 126.85-1.344 5.363-6.122 9.15-11.651 9.15H24.103c-7.498 0-13.194-6.807-11.807-14.176C33.933 94.924 134.813 8 256 8c66.448 0 126.791 26.136 171.315 68.685L463.03 40.97C478.149 25.851 504 36.559 504 57.941V192c0 13.255-10.745 24-24 24H345.941c-21.382 0-32.09-25.851-16.971-40.971l41.75-41.749zM32 296h134.059c21.382 0 32.09 25.851 16.971 40.971l-41.75 41.75c31.262 29.273 71.835 45.319 114.876 45.28 77.418-.07 144.315-53.144 162.787-126.849 1.344-5.363 6.122-9.15 11.651-9.15h57.304c7.498 0 13.194 6.807 11.807 14.176C478.067 417.076 377.187 504 256 504c-66.448 0-126.791-26.136-171.315-68.685L48.97 471.03C33.851 486.149 8 475.441 8 454.059V320c0-13.255 10.745-24 24-24z\"></path></svg>","FaExclamationTriangle":"<svg fill=\"currentColor\" viewBox=\"0 0 576 512\" aria-hidden=\"true\" focusable=\"false\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M569.517 440.013C587.975 472.007 564.806 512 527.94 512H48.054c-36.937 0-59.999-40.055-41.577-71.987L246.423 23.985c18.467-32.009 64.72-31.951 83.154 0l239.94 416.028zM288 354c-25.405 0-46 20.595-46 46s20.595 46 46 46 46-20.595 46-46-20.595-46-46-46zm-43.673-165.346l7.418 136c.347 6.364 5.609 11.346 11.982 11.346h48.546c6.373 0 11.635-4.982 11.982-11.346l7.418-136c.375-6.874-5.098-12.654-11.982-12.654h-63.383c-6.884 0-12.356 5.78-11.981 12.654z\"></path></svg>","FaCheckCircle":"<svg fill=\"currentColor\" viewBox=\"0 0 512 512\" aria-hidden=\"true\" focusable=\"false\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z\"></path></svg>","FaTheaterMasks":"<svg fill=\"currentColor\" viewBox=\"0 0 640 512\" aria-hidden=\"true\" focusable=\"false\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M206.86 245.15c-35.88 10.45-59.95 41.2-57.53 74.1 11.4-12.72 28.81-23.7 49.9-30.92l7.63-43.18zM95.81 295L64.08 115.49c-.29-1.62.28-2.62.24-2.65 57.76-32.06 123.12-49.01 189.01-49.01 1.61 0 3.23.17 4.85.19 13.95-13.47 31.73-22.83 51.59-26 18.89-3.02 38.05-4.55 57.18-5.32-9.99-13.95-24.48-24.23-41.77-27C301.27 1.89 277.24 0 253.32 0 176.66 0 101.02 19.42 33.2 57.06 9.03 70.48-3.92 98.48 1.05 126.58l31.73 179.51c14.23 80.52 136.33 142.08 204.45 142.08 3.59 0 6.75-.46 10.01-.8-13.52-17.08-28.94-40.48-39.5-67.58-47.61-12.98-106.06-51.62-111.93-84.79zm97.55-137.46c-.73-4.12-2.23-7.87-4.07-11.4-8.25 8.91-20.67 15.75-35.32 18.32-14.65 2.58-28.67.4-39.48-5.17-.52 3.94-.64 7.98.09 12.1 3.84 21.7 24.58 36.19 46.34 32.37 21.75-3.82 36.28-24.52 32.44-46.22zM606.8 120.9c-88.98-49.38-191.43-67.41-291.98-51.35-27.31 4.36-49.08 26.26-54.04 54.36l-31.73 179.51c-15.39 87.05 95.28 196.27 158.31 207.35 63.03 11.09 204.47-53.79 219.86-140.84l31.73-179.51c4.97-28.11-7.98-56.11-32.15-69.52zm-273.24 96.8c3.84-21.7 24.58-36.19 46.34-32.36 21.76 3.83 36.28 24.52 32.45 46.22-.73 4.12-2.23 7.87-4.07 11.4-8.25-8.91-20.67-15.75-35.32-18.32-14.65-2.58-28.67-.4-39.48 5.17-.53-3.95-.65-7.99.08-12.11zm70.47 198.76c-55.68-9.79-93.52-59.27-89.04-112.9 20.6 25.54 56.21 46.17 99.49 53.78 43.28 7.61 83.82.37 111.93-16.6-14.18 51.94-66.71 85.51-122.38 75.72zm130.3-151.34c-8.25-8.91-20.68-15.75-35.33-18.32-14.65-2.58-28.67-.4-39.48 5.17-.52-3.94-.64-7.98.09-12.1 3.84-21.7 24.58-36.19 46.34-32.37 21.75 3.83 36.28 24.52 32.45 46.22-.73 4.13-2.23 7.88-4.07 11.4z\"></path></svg>","FaBan":"<svg fill=\"currentColor\" viewBox=\"0 0 512 512\" aria-hidden=\"true\" focusable=\"false\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M256 8C119.034 8 8 119.033 8 256s111.034 248 248 248 248-111.034 248-248S392.967 8 256 8zm130.108 117.892c65.448 65.448 70 165.481 20.677 235.637L150.47 105.216c70.204-49.356 170.226-44.735 235.638 20.676zM125.892 386.108c-65.448-65.448-70-165.481-20.677-235.637L361.53 406.784c-70.203 49.356-170.226 44.736-235.638-20.676z\"></path></svg>","FaLock":"<svg fill=\"currentColor\" viewBox=\"0 0 448 512\" aria-hidden=\"true\" focusable=\"false\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M400 224h-24v-72C376 68.2 307.8 0 224 0S72 68.2 72 152v72H48c-26.5 0-48 21.5-48 48v192c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V272c0-26.5-21.5-48-48-48zm-104 0H152v-72c0-39.7 32.3-72 72-72s72 32.3 72 72v72z\"></path></svg>","FaWaveSquare":"<svg fill=\"currentColor\" viewBox=\"0 0 640 512\" aria-hidden=\"true\" focusable=\"false\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M476 480H324a36 36 0 0 1-36-36V96h-96v156a36 36 0 0 1-36 36H16a16 16 0 0 1-16-16v-32a16 16 0 0 1 16-16h112V68a36 36 0 0 1 36-36h152a36 36 0 0 1 36 36v348h96V260a36 36 0 0 1 36-36h140a16 16 0 0 1 16 16v32a16 16 0 0 1-16 16H512v156a36 36 0 0 1-36 36z\"></path></svg>","FaRedo":"<svg fill=\"currentColor\" viewBox=\"0 0 512 512\" aria-hidden=\"true\" focusable=\"false\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M500.33 0h-47.41a12 12 0 0 0-12 12.57l4 82.76A247.42 247.42 0 0 0 256 8C119.34 8 7.9 119.53 8 256.19 8.1 393.07 119.1 504 256 504a247.1 247.1 0 0 0 166.18-63.91 12 12 0 0 0 .48-17.43l-34-34a12 12 0 0 0-16.38-.55A176 176 0 1 1 402.1 157.8l-101.53-4.87a12 12 0 0 0-12.57 12v47.41a12 12 0 0 0 12 12h200.33a12 12 0 0 0 12-12V12a12 12 0 0 0-12-12z\"></path></svg>","FaStar":"<svg fill=\"currentColor\" viewBox=\"0 0 576 512\" aria-hidden=\"true\" focusable=\"false\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z\"></path></svg>","FaStop":"<svg fill=\"currentColor\" viewBox=\"0 0 448 512\" aria-hidden=\"true\" focusable=\"false\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M400 32H48C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V80c0-26.5-21.5-48-48-48z\"></path></svg>"};</script>
+<script>/* Pulau 3: Penilaian Suara — aplikasi utama.
+ * Seni bina: pengecaman suara pelayar (Web Speech API, ms-MY) + analisis nada dalam peranti (Web Audio).
+ * Tiada kunci API, tiada pelayan, tiada storan. Lihat PANDUAN.md. */
+(function () {
+  'use strict';
+  var C = window.P3_CONFIG, A = window.P3Align, PT = window.P3Pitch, IC = window.P3_ICONS;
+  var parsed = A.parsePassage(C.petikan);
+  var $ = function (id) { return document.getElementById(id); };
+  var SRClass = window.SpeechRecognition || window.webkitSpeechRecognition || null;
+
+  var S = {
+    screen: 'home', demo: false, srSupported: !!SRClass, onDevice: false, policyBlocked: false,
+    stream: null, ctx: null, analyser: null, buf: null, pitchTimer: null, frames: [], loudFrames: 0,
+    rec: null, active: false, userStopped: false, netErr: false, restarts: 0,
+    startedAt: 0, lastSpeechAt: 0, tick: null, endReason: '',
+    segMain: [], segRep: [], interim: '', mode: 'penuh', range: null, repeatLabel: '', repeatKind: '',
+    fed: {}, mainAnalysis: null, demoContour: null, demoEngine: null, toneSeen: {}, repeatsDone: [],
+  };
+  window.__P3 = { S: S, parsed: parsed };
+
+  // ---------------------------------------------------------------- helpers
+  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+  function icon(n) { return IC[n] || ''; }
+  function now() { return performance.now() / 1000; }
+  function clean(w) { return String(w).replace(/[.,!?;:"“”()]/g, ''); }
+  function policyAllows(f) { try { var p = document.permissionsPolicy || document.featurePolicy; if (p && p.allowsFeature) return p.allowsFeature(f); } catch (e) {} return null; }
+  var inFrame = (function () { try { return window.self !== window.top; } catch (e) { return true; } })();
+
+  // ---------------------------------------------------------------- status
+  var STATUS = {
+    'mic-off': ['FaMicrophoneSlash', 'Mikrofon belum diaktifkan'],
+    'mic-on': ['FaMicrophone', 'Mikrofon aktif'],
+    'connecting': ['FaSyncAlt', 'Menyambung ke AI…'],
+    'listening': [null, 'Sedang mendengar'],
+    'interrupted': ['FaExclamationTriangle', 'Sambungan terganggu'],
+    'done': ['FaCheckCircle', 'Sesi tamat'],
+    'demo': ['FaTheaterMasks', 'DEMO — tiada mikrofon digunakan'],
+    'unsupported': ['FaBan', 'Pengecaman suara tidak disokong'],
+    'denied': ['FaLock', 'Mikrofon disekat'],
+  };
+  function setStatus(key) {
+    var st = STATUS[key], el = $('status');
+    S.status = key;
+    el.className = 'status s-' + key;
+    el.innerHTML = (st[0] ? icon(st[0]) : '<span class="dot" aria-hidden="true"></span>') + '<span>' + esc(st[1]) + '</span>';
+  }
+
+  // ---------------------------------------------------------------- screens & dialog
+  function show(name) {
+    ['home', 'cara', 'mic', 'baca', 'tamat'].forEach(function (s) { $('s-' + s).hidden = s !== name; });
+    S.screen = name;
+    var h = document.querySelector('#s-' + name + ' h1');
+    if (h) h.focus({ preventScroll: false });
+    window.scrollTo(0, 0);
+  }
+  var lastFocus = null;
+  function dialog(title, html, buttons) {
+    lastFocus = document.activeElement;
+    $('dlgTitle').textContent = title;
+    $('dlgBody').innerHTML = html;
+    $('dlgBtns').innerHTML = (buttons || [{ label: 'Faham', act: 'closedlg', cls: 'primary' }]).map(function (b) {
+      return '<button type="button" class="btn ' + (b.cls || 'light') + '" data-act="' + b.act + '">' + esc(b.label) + '</button>';
+    }).join('');
+    $('dialog').hidden = false;
+    var f = $('dlgBtns').querySelector('button'); if (f) f.focus();
+  }
+  function closeDialog() { $('dialog').hidden = true; if (lastFocus && lastFocus.focus) lastFocus.focus(); }
+
+  // ---------------------------------------------------------------- passage rendering
+  function renderPassage() {
+    $('passageTitle').textContent = C.tajukPetikan;
+    $('homeTitle').textContent = C.tajukPetikan;
+    var html = '';
+    C.petikan.forEach(function (_, pi) {
+      html += '<p class="para">';
+      parsed.sentences.filter(function (s) { return s.paragraph === pi; }).forEach(function (s) {
+        html += '<span class="sent" data-s="' + s.index + '">';
+        for (var w = s.first; w <= s.last; w++) html += '<span class="w" data-w="' + w + '">' + esc(parsed.words[w].raw) + '</span> ';
+        html += '</span>';
+      });
+      html += '</p>';
+    });
+    $('passage').innerHTML = html;
+  }
+  var BADGE = { semak: '?', lain: '?', kurangPasti: '~', tinggal: '○' };
+  var SR_LABEL = { betul: '', semak: ' (semak)', lain: ' (semak)', kurangPasti: ' (AI kurang pasti)', tinggal: ' (mungkin tertinggal)' };
+  function paintWords(an) {
+    an.words.forEach(function (w) {
+      var el = document.querySelector('.w[data-w="' + w.index + '"]'); if (!el) return;
+      el.className = 'w' + (w.state !== 'belum' ? ' ' + w.state : '');
+      el.innerHTML = esc(parsed.words[w.index].raw) + (BADGE[w.state] ? '<span class="badge" aria-hidden="true">' + BADGE[w.state] + '</span><span class="sr">' + SR_LABEL[w.state] + '</span>' : '');
+    });
+  }
+  function clearMarks() {
+    document.querySelectorAll('.w').forEach(function (el) { el.className = 'w'; el.textContent = parsed.words[+el.dataset.w].raw; });
+    document.querySelectorAll('.sent').forEach(function (el) { el.classList.remove('current', 'focus', 'dim'); });
+  }
+  function paintCursor(reachedWord) {
+    document.querySelectorAll('.w.cursor').forEach(function (el) { el.classList.remove('cursor'); });
+    document.querySelectorAll('.sent.current').forEach(function (el) { el.classList.remove('current'); });
+    var next = reachedWord + 1;
+    if (S.mode === 'penuh' && next < parsed.words.length) {
+      var se = document.querySelector('.sent[data-s="' + parsed.words[next].sentence + '"]'); if (se) se.classList.add('current');
+    }
+    var cur = document.querySelector('.w[data-w="' + reachedWord + '"]'); if (cur) cur.classList.add('cursor');
+  }
+  function renderHeard() {
+    var segs = S.mode === 'penuh' ? S.segMain : S.segRep;
+    var finals = segs.map(function (s) { return s.text; }).join(' ');
+    var p = $('heardText');
+    if (!finals && !S.interim) { p.innerHTML = '<span class="interim">' + (S.active ? 'Mula membaca sekarang…' : 'Tekan Mula Membaca, kemudian baca dengan lantang.') + '</span>'; return; }
+    var tail = finals.split(' ').slice(-40).join(' ');
+    p.innerHTML = esc(tail) + (S.interim ? ' <span class="interim">' + esc(S.interim) + '</span>' : '');
+  }
+
+  // ---------------------------------------------------------------- feedback text
+  var WH = ['bagaimanakah', 'mengapakah', 'kenapakah', 'siapakah', 'bilakah', 'berapakah', 'manakah', 'dimanakah', 'kemanakah', 'darimanakah'];
+  function toneTip(sent) {
+    var ws = sent.text.split(/\s+/).map(A.norm), first = ws[0], two = (ws[0] || '') + (ws[1] || '');
+    if (sent.mark === '?') {
+      if (WH.indexOf(first) >= 0 || WH.indexOf(two) >= 0)
+        return 'Ayat tanya (?) ini bermula dengan kata tanya "' + clean(sent.text.split(/\s+/)[0]) + '". Baca seperti kamu benar-benar ingin tahu. Nada di hujung ayat tidak semestinya naik. Dengar contoh guru.';
+      return 'Ayat tanya (?): baca seperti sedang bertanya. Nada biasanya naik sedikit di hujung, tetapi ikut maksud ayat.';
+    }
+    if (sent.mark === '!') return 'Ayat seruan (!) menunjukkan perasaan, contohnya gembira atau kagum. Baca dengan bersemangat. Tidak perlu menjerit.';
+    return 'Ayat penyata (.) memberi maklumat. Baca dengan tenang dan tamatkan ayat dengan jelas sebelum berhenti seketika.';
+  }
+  var MARKCLS = { '.': 'mark-dot', '?': 'mark-q', '!': 'mark-ex' };
+  function contourSvg(c) {
+    if (!c || !c.points || c.points.length < 2) return '';
+    var W = 260, Hh = 70, T = c.points[c.points.length - 1].t || 1;
+    var pts = c.points.map(function (p) {
+      var x = 8 + (p.t / T) * (W - 16), y = Hh / 2 - Math.max(-7, Math.min(7, p.st)) * (Hh / 16);
+      return x.toFixed(1) + ',' + y.toFixed(1);
+    }).join(' ');
+    var last = pts.split(' ').pop().split(',');
+    return '<svg class="contour" viewBox="0 0 ' + W + ' ' + Hh + '" role="img" aria-label="Garis nada suara kamu (cubaan)">' +
+      '<line x1="8" y1="' + Hh / 2 + '" x2="' + (W - 8) + '" y2="' + Hh / 2 + '" stroke="#C9D3EA" stroke-dasharray="4 4"/>' +
+      '<polyline points="' + pts + '" fill="none" stroke="#7C5CFF" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>' +
+      '<circle cx="' + last[0] + '" cy="' + last[1] + '" r="5" fill="#E85D8A"/></svg>';
+  }
+  var CONTOUR_TXT = { naik: 'kedengaran naik', turun: 'kedengaran menurun', datar: 'kedengaran mendatar' };
+  function toneRow(sent, contour, isDemo) {
+    var desc;
+    if (contour) {
+      desc = (isDemo ? '<b>DEMO:</b> contoh garis nada. ' : '') + 'Cermin nada (cubaan): hujung ayat ' + CONTOUR_TXT[contour.label] + '.' +
+        contourSvg(contour) + '<div class="tentative">Ini gambaran kasar, bukan markah. Guru akan menilai intonasi kamu.</div>';
+    } else {
+      desc = '<div class="tentative">Garis nada tidak dapat dilihat dengan jelas untuk ayat ini. Cuba berhenti sekejap di hujung ayat.</div>';
+    }
+    return '<div class="fb-row tone">' + icon('FaWaveSquare') + '<div><b>Intonasi</b><p>' + esc(toneTip(sent)) + '</p>' + desc + '</div></div>';
+  }
+  function wordChip(item, cls) {
+    return '<button type="button" class="chip ' + (cls || '') + '" data-act="repeatword" data-w="' + item.index + '">' + esc(clean(item.word)) + '</button>';
+  }
+  function tryRow(fb) {
+    var parts = [];
+    if (fb.toCheck.length) parts.push('<li>Cuba baca perkataan ini sekali lagi: ' + fb.toCheck.slice(0, 3).map(function (x) { return wordChip(x) + (x.heard ? '<small>(komputer mendengar "' + esc(x.heard) + '")</small>' : ''); }).join(' ') + '</li>');
+    if (fb.unsure.length) parts.push('<li>AI kurang pasti tentang perkataan ini. Cuba baca semula atau minta bantuan guru: ' + fb.unsure.slice(0, 3).map(function (x) { return wordChip(x, 'unsure'); }).join(' ') + '</li>');
+    if (fb.missed.length) parts.push('<li>Semak perkataan yang diserlahkan dengan petikan asal: ' + fb.missed.slice(0, 3).map(function (x) { return wordChip(x, 'missed'); }).join(' ') + '</li>');
+    if (fb.repeats.length) parts.push('<li>Kamu mengulang "' + esc(fb.repeats[0]) + '". Tidak mengapa! Cuba baca ayat ini dengan lancar.</li>');
+    if (!parts.length) return '<div class="fb-row try">' + icon('FaRedo') + '<div><b>Apa yang boleh kamu cuba lagi?</b><p>Bagus! Cuba sebut dengan lebih jelas dan yakin pada bacaan seterusnya.</p></div></div>';
+    return '<div class="fb-row try">' + icon('FaRedo') + '<div><b>Apa yang boleh kamu cuba lagi?</b><ul>' + parts.join('') + '</ul></div></div>';
+  }
+  function goodRow(fb) {
+    var line = fb.allClear ? 'Semua perkataan dalam ayat ini didengar sama seperti petikan.' : 'Kamu membaca ayat ini hingga habis.';
+    if (fb.goodExample) line += ' Perkataan "' + esc(fb.goodExample) + '" didengar dengan jelas.';
+    return '<div class="fb-row good">' + icon('FaStar') + '<div><b>Apa yang kamu sudah buat dengan baik?</b><p>' + line + '</p></div></div>';
+  }
+  function addCard(html) {
+    $('fbEmpty').hidden = true;
+    var d = document.createElement('div'); d.innerHTML = html;
+    var card = d.firstChild; $('fbList').insertBefore(card, $('fbList').firstChild);
+    while ($('fbList').children.length > 8) $('fbList').removeChild($('fbList').lastChild);
+  }
+  function sentenceCard(sIdx, an, contour, title) {
+    var sent = parsed.sentences[sIdx], fb = A.sentenceFeedback(parsed, an, sIdx);
+    var demoTag = S.demo ? '<span class="tag-demo">DEMO</span>' : '';
+    addCard('<article class="card ' + MARKCLS[sent.mark] + '"><header><span class="mk" aria-hidden="true">' + esc(sent.mark) + '</span>' + esc(title || ('AYAT ' + (sIdx + 1))) + demoTag + '</header>' +
+      '<p class="quote">“' + esc(sent.text) + '”</p>' + goodRow(fb) + tryRow(fb) + toneRow(sent, contour, S.demo) +
+      '<div class="btn-row" style="margin-top:8px"><button type="button" class="btn violet small" data-act="repeatsent" data-s="' + sIdx + '">' + icon('FaRedo') + 'Mari baca sekali lagi!</button></div></article>');
+    return fb;
+  }
+
+  // ---------------------------------------------------------------- analysis pipeline
+  function analyseMain(withInterim) {
+    var segs = S.segMain.slice();
+    if (withInterim && S.interim) segs.push({ text: S.interim, confidence: null, final: false });
+    return A.analyse(parsed, segs, { lowConf: C.ambangKurangPasti });
+  }
+  function onInterim(text) {
+    if (!S.active) return;
+    S.interim = text; S.lastSpeechAt = now();
+    renderHeard();
+    if (S.mode === 'penuh') paintCursor(analyseMain(true).reachedWord);
+  }
+  function currentContour() {
+    if (S.demo) return S.demoContour;
+    var t = now();
+    return PT.endContour(S.frames.filter(function (f) { return f.t > t - 5; }), t);
+  }
+  function onFinal(r) {
+    if (!S.active) return;
+    S.interim = ''; S.lastSpeechAt = now();
+    var contour = currentContour();
+    if (S.mode === 'penuh') {
+      S.segMain.push({ text: r.text, confidence: r.confidence, final: true });
+      var an = analyseMain(false); S.mainAnalysis = an;
+      paintWords(an); paintCursor(an.reachedWord);
+      var fresh = an.sentencesDone.filter(function (i) { return !S.fed[i]; });
+      fresh.forEach(function (sIdx, k) {
+        S.fed[sIdx] = true;
+        var c = k === fresh.length - 1 ? contour : null;   // only the sentence at the pause has a usable contour
+        if (c) S.toneSeen[sIdx] = c.label;
+        sentenceCard(sIdx, an, c);
+      });
+      if (an.reachedWord >= parsed.words.length - 1) $('heardText').insertAdjacentHTML('beforeend', '<br><b>Kamu sudah sampai ke hujung petikan! Tekan Tamat Membaca.</b>');
+    } else {
+      S.segRep.push({ text: r.text, confidence: r.confidence, final: true });
+      var ar = A.analyse(parsed, S.segRep, { range: S.range, lowConf: C.ambangKurangPasti });
+      paintWords(ar);
+      if (ar.reachedWord >= S.range[1]) finishRepeat(ar, contour);
+    }
+    renderHeard();
+  }
+  function finishRepeat(ar, contour) {
+    var label = S.repeatLabel;
+    if (S.repeatKind === 'sentence') {
+      var sIdx = parsed.words[S.range[0]].sentence;
+      var fb = sentenceCard(sIdx, ar, contour, 'BACAAN SEMULA — AYAT ' + (sIdx + 1));
+      S.repeatsDone.push({ label: label, clear: fb.allClear });
+    } else {
+      var w = ar.words[0], word = clean(parsed.words[w.index].raw), demoTag = S.demo ? '<span class="tag-demo">DEMO</span>' : '';
+      var msg = w.state === 'betul' ? 'Bagus! Perkataan "' + esc(word) + '" didengar sama seperti petikan.'
+        : w.state === 'kurangPasti' ? 'AI kurang pasti tentang perkataan ini. Cuba baca semula atau minta bantuan guru.'
+          : 'Komputer mendengar "' + esc(w.heard || '…') + '". Semak perkataan dengan petikan asal, kemudian cuba sekali lagi atau minta bantuan guru.';
+      addCard('<article class="card"><header>BACAAN SEMULA — PERKATAAN' + demoTag + '</header><p class="quote"><b>' + esc(word) + '</b></p><div class="fb-row ' + (w.state === 'betul' ? 'good' : 'try') + '">' + icon(w.state === 'betul' ? 'FaStar' : 'FaRedo') + '<div><p>' + msg + '</p></div></div>' +
+        '<div class="btn-row" style="margin-top:8px"><button type="button" class="btn violet small" data-act="repeatword" data-w="' + w.index + '">' + icon('FaRedo') + 'Cuba lagi</button></div></article>');
+      S.repeatsDone.push({ label: label, clear: w.state === 'betul' });
+    }
+    exitRepeat();
+  }
+
+  // ---------------------------------------------------------------- repeat mode
+  function enterRepeat(range, kind, label) {
+    if (S.demo) { dialog('Mod Demo', '<p>Bacaan semula hanya tersedia dalam mod sebenar dengan mikrofon.</p>'); return; }
+    S.mode = 'ulang'; S.range = range; S.repeatKind = kind; S.repeatLabel = label; S.segRep = []; S.interim = '';
+    document.querySelectorAll('.sent').forEach(function (el) {
+      var s = parsed.sentences[+el.dataset.s];
+      var inside = !(s.last < range[0] || s.first > range[1]);
+      el.classList.toggle('dim', !inside); el.classList.toggle('focus', inside); el.classList.remove('current');
+    });
+    for (var i = range[0]; i <= range[1]; i++) { var el2 = document.querySelector('.w[data-w="' + i + '"]'); if (el2) { el2.className = 'w'; el2.textContent = parsed.words[i].raw; } }
+    $('repeatText').textContent = 'Bacaan semula: ' + label;
+    $('repeatBanner').hidden = false;
+    renderHeard();
+    if (S.screen !== 'baca') show('baca');
+    if (!S.active) startSession({ fresh: false });
+  }
+  function exitRepeat() {
+    S.mode = 'penuh'; S.range = null; S.segRep = []; S.interim = '';
+    $('repeatBanner').hidden = true;
+    document.querySelectorAll('.sent').forEach(function (el) { el.classList.remove('dim', 'focus'); });
+    if (S.mainAnalysis) { paintWords(S.mainAnalysis); paintCursor(S.mainAnalysis.reachedWord); } else clearMarks();
+    renderHeard();
+  }
+
+  // ---------------------------------------------------------------- microphone + pitch (on device)
+  function micErrorUI(err) {
+    var name = err && err.name;
+    $('micTest').hidden = true;
+    if (S.policyBlocked) { $('policyNote').hidden = false; setStatus('denied'); return; }
+    $('deniedNote').hidden = false; setStatus('denied');
+    if (name === 'NotFoundError' || name === 'OverconstrainedError') {
+      $('deniedText').textContent = 'Tiada mikrofon dikesan. Sambungkan mikrofon atau set kepala, kemudian cuba lagi.';
+      $('deniedSteps').hidden = true;
+    } else if (name === 'NotReadableError') {
+      $('deniedText').textContent = 'Mikrofon sedang digunakan oleh aplikasi lain. Tutup aplikasi itu, kemudian cuba lagi.';
+      $('deniedSteps').hidden = true;
+    } else { $('deniedText').textContent = 'Jangan risau! Minta bantuan guru:'; $('deniedSteps').hidden = false; }
+  }
+  function ensureMic() {
+    if (S.demo) return Promise.resolve(false);                 // demo never touches the microphone
+    if (S.stream && S.stream.getAudioTracks().some(function (t) { return t.readyState === 'live'; })) return Promise.resolve(true);
+    if (policyAllows('microphone') === false) { S.policyBlocked = true; micErrorUI(null); return Promise.resolve(false); }
+    if (!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia)) { micErrorUI({ name: 'NotFoundError' }); return Promise.resolve(false); }
+    return navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true, noiseSuppression: true, autoGainControl: true } })
+      .then(function (stream) {
+        S.stream = stream; $('deniedNote').hidden = true; $('policyNote').hidden = true;
+        stream.getAudioTracks().forEach(function (t) { t.onended = function () { if (S.active) stopSession('micLost'); }; });
+        setupAudio(); setStatus('mic-on'); return true;
+      })
+      .catch(function (e) { micErrorUI(e); return false; });
+  }
+  function setupAudio() {
+    var AC = window.AudioContext || window.webkitAudioContext; if (!AC) return;
+    S.ctx = new AC(); if (S.ctx.state === 'suspended') S.ctx.resume();
+    var src = S.ctx.createMediaStreamSource(S.stream);
+    S.analyser = S.ctx.createAnalyser(); S.analyser.fftSize = 2048; src.connect(S.analyser);
+    S.buf = new Float32Array(S.analyser.fftSize);
+    var factor = Math.max(1, Math.round(S.ctx.sampleRate / 16000)), sr = S.ctx.sampleRate / factor;
+    var small = new Float32Array(Math.floor(S.buf.length / factor));
+    S.frames = [];
+    S.pitchTimer = setInterval(function () {
+      if (!S.analyser) return;
+      S.analyser.getFloatTimeDomainData(S.buf);
+      for (var i = 0; i < small.length; i++) { var s = 0; for (var k = 0; k < factor; k++) s += S.buf[i * factor + k]; small[i] = s / factor; }
+      var d = PT.detect(small, sr), t = now();
+      S.frames.push({ t: t, f0: d.f0, rms: d.rms });
+      while (S.frames.length && S.frames[0].t < t - 20) S.frames.shift();
+      if (S.screen === 'mic') {
+        var lvl = Math.min(100, Math.round(d.rms * 500));
+        $('meter').firstChild.style.width = lvl + '%'; $('meter').setAttribute('aria-valuenow', lvl);
+        S.loudFrames = d.rms > 0.03 ? S.loudFrames + 1 : Math.max(0, S.loudFrames - 1);
+        if (S.loudFrames > 6) $('micOk').hidden = false;
+      }
+    }, 30);
+  }
+  function releaseMic() {
+    if (S.pitchTimer) clearInterval(S.pitchTimer); S.pitchTimer = null;
+    if (S.stream) S.stream.getTracks().forEach(function (t) { t.stop(); });
+    S.stream = null; S.analyser = null;
+    if (S.ctx) { try { S.ctx.close(); } catch (e) {} } S.ctx = null;
+    S.frames = []; S.loudFrames = 0;
+  }
+
+  // ---------------------------------------------------------------- speech engine (Web Speech API)
+  function makeRec() {
+    var r = new SRClass(), seen = {};
+    r.lang = C.bahasa; r.continuous = true; r.interimResults = true; r.maxAlternatives = 1;
+    if (S.onDevice) { try { r.processLocally = true; } catch (e) {} }
+    r.onaudiostart = function () { if (S.active) { S.netErr = false; setStatus('listening'); } };
+    r.onresult = function (ev) {
+      var interim = '';
+      for (var i = ev.resultIndex; i < ev.results.length; i++) {
+        var res = ev.results[i], alt = res[0];
+        if (res.isFinal) { if (!seen[i]) { seen[i] = true; onFinal({ text: alt.transcript, confidence: alt.confidence > 0 ? alt.confidence : null }); } }
+        else interim += alt.transcript;
+      }
+      if (interim) onInterim(interim.trim());
+    };
+    r.onerror = function (ev) { onRecError(ev.error); };
+    r.onend = function () { onRecEnd(r); };
+    return r;
+  }
+  function startRec() {
+    setStatus('connecting');
+    try { S.rec = makeRec(); S.rec.start(); }
+    catch (e) { onRecError('start-failed'); }
+  }
+  function onRecError(code) {
+    if (!S.active) return;
+    if (code === 'no-speech' || code === 'aborted') return;      // normal; recogniser restarts on 'end'
+    if (code === 'not-allowed' || code === 'service-not-allowed') {
+      stopSession('blocked');
+      dialog('Pengecaman suara disekat', '<p>Pelayar atau halaman ini tidak membenarkan pengecaman suara. Minta bantuan guru. Tiada keputusan dibuat.</p>');
+      return;
+    }
+    if (code === 'audio-capture') { stopSession('micLost'); return; }
+    if (code === 'language-not-supported') {
+      stopSession('blocked');
+      dialog('Bahasa tidak disokong', '<p>Pelayar ini tidak menyokong pengecaman Bahasa Melayu (ms-MY). Cuba Google Chrome.</p>');
+      return;
+    }
+    // network or unknown: be honest, never invent results
+    S.netErr = true; setStatus('interrupted');
+    $('heardText').insertAdjacentHTML('beforeend', '<br><span style="color:var(--red);font-weight:bold">Sambungan terganggu. Tiada cadangan dibuat untuk bahagian ini.</span> ' +
+      '<button type="button" class="btn small nav" data-act="reconnect">' + icon('FaSyncAlt') + 'Sambung semula</button>');
+  }
+  function onRecEnd(r) {
+    if (r !== S.rec) return;
+    if (S.active && !S.userStopped && !S.netErr) {
+      if (++S.restarts > 60) { stopSession('limit'); return; }
+      setTimeout(function () { if (S.active && !S.netErr) startRec(); }, 250);   // Chrome ends after pauses; continue listening
+    }
+  }
+
+  // ---------------------------------------------------------------- demo engine (no microphone)
+  var DEMO_SCRIPT = [
+    { text: 'zara di perpustakaan', conf: 0.93, contour: 'turun' },
+    { text: 'dia membaca maklumat tentang petua kejayaan murid cemerlang', conf: 0.9, contour: 'turun' },
+    { text: 'apakah murid murid sudah bersedia untuk menjadi murid cemerlang', conf: 0.88, contour: 'naik' },
+    { text: 'terdapat banyak cara seperti yang dinyatakan di bawah', conf: 0.9, contour: 'datar' },
+    { text: 'saya sentiasa jujur dan menjaga tingkah laku dalam pertuturan serta perbuatan', conf: 0.91, contour: 'turun' },
+    { text: 'inilah sikap amana yang perlu ada dalam diri setiap murid', conf: 0.86, contour: 'turun' },
+    { text: 'wah petua petua ini sangat bagus', conf: 0.9, contour: 'naik' },
+    { text: 'saya perlu bijak mengurus diri masa serta melakukan aktiviti yang berpaedah', conf: 0.34, contour: null },
+  ];
+  function demoPoints(label) {
+    var pts = [], n = 28;
+    for (var i = 0; i < n; i++) {
+      var x = i / (n - 1), base = Math.sin(i * 0.9) * 0.6;
+      var end = x > 0.6 ? (x - 0.6) / 0.4 : 0;
+      pts.push({ t: x * 0.9, st: base + (label === 'naik' ? end * 4.5 : label === 'turun' ? -end * 4 : 0) });
+    }
+    return pts;
+  }
+  function makeDemo() {
+    var timers = [];
+    return {
+      start: function () {
+        var t = 700;
+        DEMO_SCRIPT.forEach(function (item) {
+          var words = item.text.split(' ');
+          words.forEach(function (_, i) { timers.push(setTimeout(function () { onInterim(words.slice(0, i + 1).join(' ')); }, t)); t += 230; });
+          timers.push(setTimeout(function () {
+            S.demoContour = item.contour ? { label: item.contour, points: demoPoints(item.contour), demo: true } : null;
+            onFinal({ text: item.text, confidence: item.conf });
+          }, t + 300));
+          t += 1800;
+        });
+        timers.push(setTimeout(function () {
+          if (!S.active) return;
+          $('heardText').insertAdjacentHTML('beforeend', '<br><b>DEMO selesai. Tekan Tamat Membaca untuk melihat ringkasan contoh.</b>');
+        }, t));
+      },
+      abort: function () { timers.forEach(clearTimeout); timers = []; },
+    };
+  }
+
+  // ---------------------------------------------------------------- session lifecycle
+  function setSessionButton(active) {
+    var b = $('btnSession');
+    b.className = 'btn big ' + (active ? 'stop' : 'rec');
+    b.innerHTML = active ? icon('FaStop') + '<span>Tamat Membaca</span>' : icon('FaMicrophone') + '<span>Mula Membaca</span>';
+  }
+  function resetReading() {
+    S.segMain = []; S.segRep = []; S.interim = ''; S.fed = {}; S.mainAnalysis = null; S.toneSeen = {}; S.repeatsDone = [];
+    S.mode = 'penuh'; S.range = null; $('repeatBanner').hidden = true;
+    $('fbList').innerHTML = ''; $('fbEmpty').hidden = false; clearMarks(); renderHeard();
+  }
+  function startSession(opt) {
+    opt = opt || {};
+    if (S.active) return Promise.resolve();
+    if (opt.fresh) resetReading();
+    if (S.demo) {
+      S.active = true; S.userStopped = false; S.startedAt = now(); S.lastSpeechAt = now();
+      setStatus('demo'); setSessionButton(true); startTick(); renderHeard();
+      S.demoEngine = makeDemo(); S.demoEngine.start();
+      return Promise.resolve();
+    }
+    if (!S.srSupported) { dialog('Pengecaman suara tidak disokong', '<p>Pelayar ini tidak mempunyai pengecaman suara. Guna Google Chrome atau Microsoft Edge pada komputer, atau cuba Mod Demo.</p>'); return Promise.resolve(); }
+    return ensureMic().then(function (ok) {
+      if (!ok) { show('mic'); return; }
+      S.active = true; S.userStopped = false; S.netErr = false; S.restarts = 0;
+      S.startedAt = now(); S.lastSpeechAt = now();
+      setSessionButton(true); startTick(); renderHeard(); startRec();
+    });
+  }
+  function startTick() {
+    clearInterval(S.tick);
+    S.tick = setInterval(function () {
+      var el = now() - S.startedAt, m = Math.floor(el / 60), s = Math.floor(el % 60);
+      $('timer').textContent = m + ':' + (s < 10 ? '0' : '') + s + ' / ' + C.hadSesiMinit + ':00';
+      if (el > C.hadSesiMinit * 60) stopSession('limit');
+      else if (!S.demo && now() - S.lastSpeechAt > C.senyapJedaSaat) stopSession('silence');
+    }, 500);
+  }
+  function stopSession(reason) {
+    var wasActive = S.active;
+    S.active = false; S.userStopped = true; S.endReason = reason || 'user';
+    clearInterval(S.tick); S.tick = null;
+    if (S.demoEngine) { S.demoEngine.abort(); S.demoEngine = null; }
+    if (S.rec) { var r = S.rec; S.rec = null; try { r.onend = null; r.abort(); } catch (e) {} }
+    releaseMic();
+    setSessionButton(false);
+    if (S.mode === 'ulang') exitRepeat();
+    S.interim = ''; renderHeard();
+    setStatus(S.demo ? 'demo' : (reason === 'blocked' ? 'denied' : 'done'));
+    if (wasActive && reason !== 'hidden' && reason !== 'blocked') { buildEnd(); show('tamat'); }
+  }
+
+  // ---------------------------------------------------------------- end screen
+  function buildEnd() {
+    var an = S.mainAnalysis || A.analyse(parsed, [], {});
+    var done = an.sentencesDone.length, total = parsed.sentences.length;
+    var good = [], check = {}, unsure = {}, missed = {};
+    an.words.forEach(function (w) {
+      var raw = clean(parsed.words[w.index].raw);
+      if (w.state === 'betul' && raw.length >= 6) good.push(raw);
+      if (w.state === 'semak' || w.state === 'lain') check[w.index] = raw;
+      if (w.state === 'kurangPasti') unsure[w.index] = raw;
+      if (w.state === 'tinggal') missed[w.index] = raw;
+    });
+    good = good.filter(function (x, i, a) { return a.indexOf(x) === i; }).sort(function (a, b) { return b.length - a.length; }).slice(0, 4);
+    var reasons = { limit: 'Masa sesi sudah tamat. ', silence: 'Sesi ditamatkan kerana tiada suara didengar seketika. ', micLost: 'Mikrofon terputus. ', user: '' };
+    $('endLead').textContent = (S.demo ? 'MOD DEMO: semua cadangan di bawah ialah CONTOH. ' : 'Mikrofon sudah ditutup. ') + (reasons[S.endReason] || '') + 'Tunjukkan cadangan ini kepada guru kamu.';
+    var demoTag = S.demo ? ' <span class="tag-demo">DEMO</span>' : '';
+    $('endGood').innerHTML = (done ? '<p>Kamu membaca <b>' + done + '</b> daripada ' + total + ' ayat hingga habis.' + demoTag + '</p>' : '<p>Kamu sudah mencuba. Itu langkah pertama yang baik!' + demoTag + '</p>') +
+      (good.length ? '<p>Perkataan ini didengar dengan jelas: <b>' + good.map(esc).join(', ') + '</b>.</p>' : '') +
+      (S.repeatsDone.some(function (r) { return r.clear; }) ? '<p>Kamu berjaya membaca semula dengan baik. Syabas!</p>' : '');
+    var chips = function (obj, cls) { return Object.keys(obj).slice(0, 6).map(function (k) { return '<button type="button" class="chip ' + cls + '" data-act="repeatword" data-w="' + k + '">' + esc(obj[k]) + '</button>'; }).join(' '); };
+    var t = [];
+    if (Object.keys(check).length) t.push('<p>Cuba baca perkataan ini sekali lagi:<br>' + chips(check, '') + '</p>');
+    if (Object.keys(unsure).length) t.push('<p>AI kurang pasti tentang perkataan ini. Cuba baca semula atau minta bantuan guru:<br>' + chips(unsure, 'unsure') + '</p>');
+    if (Object.keys(missed).length) t.push('<p>Semak perkataan yang diserlahkan dengan petikan asal:<br>' + chips(missed, 'missed') + '</p>');
+    if (!t.length) t.push('<p>' + (done ? 'Tiada perkataan yang perlu disemak. Bagus! Ingat, AI juga boleh tersilap, jadi guru akan mendengar bacaan kamu.' : 'Belum ada bacaan untuk disemak.') + '</p>');
+    $('endTry').innerHTML = t.join('') + (S.demo ? '' : '<p class="tentative">Perkataan ini perlu disemak. Ini bukan bermakna sebutan kamu salah.</p>');
+    var marks = {}; an.sentencesDone.forEach(function (i) { marks[parsed.sentences[i].mark] = parsed.sentences[i]; });
+    var tips = Object.keys(marks).map(function (m) { return '<li>' + esc(toneTip(marks[m])) + '</li>'; });
+    $('endAgain').innerHTML = '<p>Baca petikan sekali lagi dengan lebih yakin dan berhenti di setiap tanda baca.</p>' + (tips.length ? '<ul>' + tips.join('') + '</ul>' : '') +
+      '<p class="tentative">Garis nada hanyalah cubaan kasar. Guru kamu ialah penilai intonasi yang utama.</p>';
+    var rows = ['Sebutan', 'Intonasi ayat penyata ( . )', 'Intonasi ayat tanya ( ? )', 'Intonasi ayat seruan ( ! )', 'Kelancaran'];
+    $('teacherRows').innerHTML = rows.map(function (r, i) {
+      return '<tr><th scope="row">' + esc(r) + '</th><td><span class="seg" role="group" aria-label="' + esc(r) + '">' +
+        '<button type="button" data-act="seg" aria-pressed="false">Sesuai</button><button type="button" data-act="seg" aria-pressed="false">Perlu bimbingan</button></span></td></tr>';
+    }).join('');
+  }
+
+  // ---------------------------------------------------------------- navigation
+  function goMap() {
+    if (S.active) stopSession('hidden');
+    if (C.pautanPeta && !inFrame) { location.href = C.pautanPeta; return; }
+    dialog('Kembali ke Peta Pulau', '<p>Tekan butang <b>PETA</b> atau <b>UTAMA</b> pada halaman Canva (di luar kotak ini) untuk kembali ke peta pulau.</p>');
+  }
+  function setDemo(on) {
+    S.demo = on; $('demoBanner').hidden = !on;
+    setStatus(on ? 'demo' : (S.srSupported ? 'mic-off' : 'unsupported'));
+  }
+
+  // ---------------------------------------------------------------- events
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest('[data-act]'); if (!b) return;
+    var act = b.getAttribute('data-act');
+    switch (act) {
+      case 'start':
+        if (S.demo) setDemo(false);
+        if (!S.srSupported) { dialog('Pengecaman suara tidak disokong', '<p>Guna Google Chrome atau Microsoft Edge pada komputer. Kamu boleh mencuba Mod Demo.</p>', [{ label: 'Cuba Mod Demo', act: 'demo', cls: 'violet' }, { label: 'Tutup', act: 'closedlg' }]); break; }
+        show('mic'); break;
+      case 'howto': show('cara'); break;
+      case 'home': if (S.active) stopSession('hidden'); show('home'); break;
+      case 'demo': closeDialog(); setDemo(true); resetReading(); show('baca'); break;
+      case 'map': goMap(); break;
+      case 'allowmic': ensureMic().then(function (ok) { if (ok) { $('micTest').hidden = false; $('btnAllow').hidden = true; } }); break;
+      case 'toread': show('baca'); break;
+      case 'session': if (S.active) stopSession('user'); else startSession({ fresh: S.mode === 'penuh' }); break;
+      case 'reconnect': if (S.active) { S.netErr = false; startRec(); } break;
+      case 'repeatsent': {
+        var s = parsed.sentences[+b.dataset.s];
+        enterRepeat([s.first, s.last], 'sentence', 'ayat ' + (s.index + 1) + ' — “' + s.text + '”'); break;
+      }
+      case 'repeatword': {
+        var wi = +b.dataset.w; enterRepeat([wi, wi], 'word', 'perkataan "' + clean(parsed.words[wi].raw) + '"'); break;
+      }
+      case 'exitrepeat': exitRepeat(); break;
+      case 'again': if (S.demo) { resetReading(); show('baca'); } else { resetReading(); show('baca'); } break;
+      case 'topassage': show('baca'); break;
+      case 'seg': b.parentNode.querySelectorAll('button').forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); }); break;
+      case 'textsize': { var cur = getComputedStyle(document.documentElement).getPropertyValue('--fs').trim(); document.documentElement.style.setProperty('--fs', cur === '1.2' ? '1' : '1.2'); break; }
+      case 'closedlg': closeDialog(); break;
+    }
+  });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !$('dialog').hidden) closeDialog(); });
+  // privacy: never keep listening in the background
+  document.addEventListener('visibilitychange', function () { if (document.hidden && S.active) stopSession('hidden'); });
+  window.addEventListener('pagehide', function () { if (S.active) stopSession('hidden'); releaseMic(); });
+
+  // ---------------------------------------------------------------- init
+  function engineInfo() {
+    var t;
+    if (!S.srSupported) t = 'Pengecaman suara: tidak disokong dalam pelayar ini.';
+    else if (S.onDevice) t = 'Pengecaman suara: dalam peranti (suara tidak keluar dari peranti ini).';
+    else t = 'Pengecaman suara: perkhidmatan dalam talian pelayar (contohnya Google bagi Chrome). Perlu sambungan Internet.';
+    if (policyAllows('microphone') === false) { S.policyBlocked = true; t += ' Mikrofon disekat oleh tetapan halaman ini.'; }
+    $('engineInfo').textContent = t;
+  }
+  renderPassage(); renderHeard();
+  $('unsupportedNote').hidden = S.srSupported;
+  setStatus(S.srSupported ? 'mic-off' : 'unsupported');
+  engineInfo();
+  // Note: SpeechRecognition.available() (on-device check) is deliberately NOT called: it crashed the renderer in testing.
+})();
+</script>
+</body>
+</html>
