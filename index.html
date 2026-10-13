@@ -985,8 +985,20 @@ window.P3_CONFIG = {
   // ---------------------------------------------------------------- navigation
   function goMap() {
     if (S.active) stopSession('hidden');
-    if (C.pautanPeta && !inFrame) { location.href = C.pautanPeta; return; }
-    dialog('Kembali ke Peta Pulau', '<p>Tekan butang <b>PETA</b> atau <b>UTAMA</b> pada halaman Canva (di luar kotak ini) untuk kembali ke peta pulau.</p>');
+    if (inFrame) { dialog('Kembali ke Peta Pulau', '<p>Tekan butang <b>PETA</b> atau <b>UTAMA</b> pada halaman Canva (di luar kotak ini) untuk kembali ke peta pulau.</p>'); return; }
+    if (C.pautanPeta) { location.href = C.pautanPeta; return; }
+    // Dibuka daripada butang Canva dalam tab baharu: tutup tab ini supaya murid kembali ke Canva.
+    var warn = S.screen === 'tamat' ? '<p><b>Perhatian:</b> keputusan pada skrin ini akan hilang. Pastikan guru sudah melihatnya.</p>' : '';
+    dialog('Kembali ke Peta Pulau', warn + '<p>Tab Pulau 3 akan ditutup. Kamu akan kembali ke halaman Canva. Tekan butang <b>PETA</b> di situ untuk ke peta pulau.</p>',
+      [{ label: 'Tutup & Kembali ke Canva', act: 'closetab', cls: 'primary' }, { label: 'Batal', act: 'closedlg' }]);
+  }
+  function closeTab() {
+    closeDialog(); releaseMic();
+    try { window.close(); } catch (e) {}
+    setTimeout(function () {   // pelayar tidak membenarkan tab ditutup oleh skrip
+      if (history.length > 1) { history.back(); return; }   // dibuka dalam tab yang sama: halaman sebelum ini ialah Canva
+      dialog('Tutup tab ini', '<p>Tekan <b>X</b> pada tab Pulau 3 di bahagian atas skrin untuk kembali ke Canva.</p>');
+    }, 400);
   }
   function setDemo(on) {
     S.demo = on; $('demoBanner').hidden = !on;
@@ -1006,6 +1018,7 @@ window.P3_CONFIG = {
       case 'home': if (S.active) stopSession('hidden'); show('home'); break;
       case 'demo': closeDialog(); setDemo(true); resetReading(); show('baca'); break;
       case 'map': goMap(); break;
+      case 'closetab': closeTab(); break;
       case 'allowmic': ensureMic().then(function (ok) { if (ok) { $('micTest').hidden = false; $('btnAllow').hidden = true; } }); break;
       case 'toread': show('baca'); break;
       case 'session': if (S.active) stopSession('user'); else startSession({ fresh: S.mode === 'penuh' }); break;
